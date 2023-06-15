@@ -1,5 +1,8 @@
 @tailwind base;
+@tailwind reset;
 @tailwind components;
+@tailwind buttons;
+@tailwind form;
 @tailwind utilities;
 
 [x-cloak] {
