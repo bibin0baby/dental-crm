@@ -7,7 +7,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Inertia\Inertia;
 
-class Dashboard extends Controller
+class DashboardController extends Controller
 {
     public function index()
     {
