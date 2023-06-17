@@ -1,10 +1,11 @@
-@tailwind base;
-@tailwind reset;
-@tailwind components;
-@tailwind buttons;
-@tailwind form;
-@tailwind utilities;
+/* Reset */
+@import 'tailwindcss/base';
+@import 'reset';
 
-[x-cloak] {
-    display: none;
-}
+/* Components */
+@import 'tailwindcss/components';
+@import 'buttons';
+@import 'form';
+
+/* Utilities */
+@import 'tailwindcss/utilities';
