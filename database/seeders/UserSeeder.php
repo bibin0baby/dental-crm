@@ -2,32 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Account;
-use App\Models\Contact;
-use App\Models\Organization;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 use Illuminate\Database\Seeder;
-use Database\Seeders\UserSeeder;
-use Database\Seeders\RolesSeeder;
+use App\Models\Account;
+use App\Models\User;
 
-class DatabaseSeeder extends Seeder
+
+class UserSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
-    public function run()
+    public function run($account = null)
     {
-        $account = Account::create(['name' => 'Dental CRM']);
 
-        $this->call([
-            RolesSeeder::class
-        ]);
-        // $this->call([
-        //     UserSeeder::class, false, $account
-        // ]);
         $users = [
             [
                 'first_name' => 'admin',
@@ -67,15 +56,5 @@ class DatabaseSeeder extends Seeder
 
             $created_user->assignRole($user['role']);
         }
-        //User::factory(5)->create(['account_id' => $account->id]);
-
-        $organizations = Organization::factory(100)
-            ->create(['account_id' => $account->id]);
-
-        Contact::factory(100)
-            ->create(['account_id' => $account->id])
-            ->each(function ($contact) use ($organizations) {
-                $contact->update(['organization_id' => $organizations->random()->id]);
-            });
     }
 }
