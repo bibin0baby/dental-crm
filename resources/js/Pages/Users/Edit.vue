@@ -6,7 +6,7 @@
         <Link class="text-indigo-400 hover:text-indigo-600" href="/users">Users</Link>
         <span class="text-indigo-400 font-medium">/</span>
         {{ form.first_name }} {{ form.last_name }}
-      </h1>
+      </h1> 
       <img v-if="user.photo" class="block ml-4 w-8 h-8 rounded-full" :src="user.photo" />
     </div>
     <trashed-message v-if="user.deleted_at" class="mb-6" @restore="restore"> This user has been deleted. </trashed-message>
@@ -20,6 +20,12 @@
           <select-input v-model="form.owner" :error="form.errors.owner" class="pb-8 pr-6 w-full lg:w-1/2" label="Owner">
             <option :value="true">Yes</option>
             <option :value="false">No</option>
+          </select-input>
+          <select-input v-model="form.role" :error="form.errors.role" class="pb-8 pr-6 w-full lg:w-1/2" label="Role">
+            <option :value="'admin'">Admin</option>
+            <option :value="standard">Receptionist</option>
+            <option :value="'doctor'">Doctor</option>
+            <option :value="'client'">Patients</option>
           </select-input>
           <file-input v-model="form.photo" :error="form.errors.photo" class="pb-8 pr-6 w-full lg:w-1/2" type="file" accept="image/*" label="Photo" />
         </div>
@@ -65,6 +71,7 @@ export default {
         email: this.user.email,
         password: '',
         owner: this.user.owner,
+        role: this.user.role,
         photo: null,
       }),
     }

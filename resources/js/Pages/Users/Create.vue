@@ -17,6 +17,7 @@
             <option :value="false">No</option>
           </select-input>
           <select-input v-model="form.role" :error="form.errors.role" class="pb-8 pr-6 w-full lg:w-1/2" label="Role">
+            <option :value="admin">Admin</option>
             <option :value="standard">Receptionist</option>
             <option :value="doctor">Doctor</option>
             <option :value="client">patients</option>

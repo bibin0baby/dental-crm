@@ -7,8 +7,9 @@
         <label class="block text-gray-700">Role:</label>
         <select v-model="form.role" class="form-select mt-1 w-full">
           <option :value="null" />
-          <option value="user">User</option>
-          <option value="owner">Owner</option>
+          <option value="standard">Receptionist</option>
+          <option value="doctor">Doctor</option>
+          <option value="client">Client</option>
         </select>
         <label class="block mt-4 text-gray-700">Trashed:</label>
         <select v-model="form.trashed" class="form-select mt-1 w-full">
@@ -27,6 +28,7 @@
         <tr class="text-left font-bold">
           <th class="pb-4 pt-6 px-6">Name</th>
           <th class="pb-4 pt-6 px-6">Email</th>
+          <th class="pb-4 pt-6 px-6">Owner</th>
           <th class="pb-4 pt-6 px-6" colspan="2">Role</th>
         </tr>
         <tr v-for="user in users" :key="user.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
@@ -44,7 +46,12 @@
           </td>
           <td class="border-t">
             <Link class="flex items-center px-6 py-4" :href="`/users/${user.id}/edit`" tabindex="-1">
-              {{ user.owner ? 'Owner' : 'User' }}
+              {{ user.owner }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="`/users/${user.id}/edit`" tabindex="-1">
+              {{ user.role }}
             </Link>
           </td>
           <td class="w-px border-t">

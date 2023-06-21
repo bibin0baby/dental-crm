@@ -140,3 +140,20 @@ Route::get('reports', [ReportsController::class, 'index'])
 Route::get('/img/{path}', [ImagesController::class, 'show'])
     ->where('path', '.*')
     ->name('image');
+
+// Doctors
+
+Route::get('doctor', [DoctorsController::class, 'index'])
+    ->name('doctor')
+    ->middleware('auth');
+
+// Receptionist
+
+Route::get('receptionist', [ReceptionistsController::class, 'index'])
+    ->name('receptionist')
+    ->middleware('auth');
+
+// Client
+
+Route::get('client', [ClientsController::class, 'index'])
+    ->name('client');
