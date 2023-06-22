@@ -65,11 +65,20 @@ Run the dev server (the output will give the address):
 php artisan serve
 ```
 
+```sh
+npm run watch
+```
+
 You're ready to go! Visit Dental CRM in your browser, and login with:
 
-- **Username:** johndoe@example.com
+- **Username:** admin@dentalcrm.com
 - **Password:** secret
 
+- **Username:** doctor@dentalcrm.com
+- **Password:** secret
+
+- **Username:** receptionist@dentalcrm.com
+- **Password:** secret
 ## Running tests
 
 To run the Dental CRM tests, run:
