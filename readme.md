@@ -86,3 +86,5 @@ To run the Dental CRM tests, run:
 ```
 phpunit
 ```
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
