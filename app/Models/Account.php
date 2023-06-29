@@ -20,4 +20,9 @@ class Account extends Model
     {
         return $this->hasMany(Contact::class);
     }
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }
