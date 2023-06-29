@@ -7,6 +7,8 @@ use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\DoctorsController;
+use App\Http\Controllers\ReceptionistsController;
 use Illuminate\Support\Facades\Route;
 
 /*
