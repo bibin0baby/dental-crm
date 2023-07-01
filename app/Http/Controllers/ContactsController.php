@@ -71,7 +71,7 @@ class ContactsController extends Controller
         return Inertia::render('Contacts/Edit', [
             'contact' => [
                 'id' => $contact->id,
-                'first_name' => $contact->first_name,
+                'break_Day' => $contact->break_Day,
                 'last_name' => $contact->last_name,
                 'organization_id' => $contact->organization_id,
                 'email' => $contact->email,
