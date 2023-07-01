@@ -9,6 +9,8 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DoctorsController;
 use App\Http\Controllers\ReceptionistsController;
+use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\AppointmentsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -159,3 +161,9 @@ Route::get('receptionist', [ReceptionistsController::class, 'index'])
 
 Route::get('client', [ClientsController::class, 'index'])
     ->name('client');
+
+//appointments
+
+Route::get('appointments', [AppointmentsController::class, 'index'])
+    ->name('appointments')
+    ->middleware('auth');
