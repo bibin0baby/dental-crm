@@ -2,7 +2,16 @@
   <div>
     <Head title="Appointments" />
     <h1 class="mb-8 text-3xl font-bold">Client scheduler</h1>
+    <button id="show-modal" @click="showModal = true">Show Modal</button>
     <FullCalendar :options="calendarOptions" />
+    <Teleport to="body">
+      <!-- use the modal component, pass in the prop -->
+      <modal :show="showModal" @close="showModal = false">
+        <template #header>
+          <h3>custom header</h3>
+        </template>
+      </modal>
+    </Teleport>
   </div>
 </template>
 
@@ -15,16 +24,22 @@ import FullCalendar from '@fullcalendar/vue3'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import timeGridPlugin from '@fullcalendar/timegrid'
+import Modal from '@/Shared/Modal.vue'
+import { ref } from 'vue'
+
+const showModal = ref(false)
 
 export default {
   components: {
     Head,
     Icon,
     Link,
-    FullCalendar
+    FullCalendar,
+    Modal
   },
   layout: ClientLayout,
   props: {
+    showModal : false
     //filters: Object,
     //appointments: Object,
   },
@@ -65,7 +80,8 @@ export default {
   },
   methods: {
     handleDateClick: function(arg) {
-      alert('date click! ' + arg.dateStr)
+      alert('date click! ' + arg.dateStr);
+      this.showModal = true;
     },
     handleSlotClick: function(selectionInfo) {
       alert('date click! ' + selectionInfo.dateStr)
