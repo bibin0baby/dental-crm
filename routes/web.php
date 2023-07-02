@@ -159,7 +159,7 @@ Route::get('receptionist', [ReceptionistsController::class, 'index'])
 
 // Client
 
-Route::get('client', [ClientsController::class, 'index'])
+Route::get('client/{doc_id}', [ClientsController::class, 'index'])
     ->name('client');
 
 //appointments
