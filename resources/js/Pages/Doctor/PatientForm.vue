@@ -12,13 +12,13 @@
           <label style="margin-left: 13px;    margin-right: 7px;"  class="pb-8 pr-6 w-full lg:w-1/02" >Days</label>
           <select-input v-model="form.AvailabilityDays" :error="form.errors.AvailabilityDays"   class="pb-8 pr-6 w-full lg:w-1/02" style="margin-left: -58px;width: 219%;"  >
             
-            <option value="Sunday">Sunday</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
+            <option value="1">Sunday</option>
+            <option value="2">Monday</option>
+            <option value="3">Tuesday</option>
+            <option value="4">Wednesday</option>
+            <option value="5">Thursday</option>
+            <option value="6">Friday</option>
+            <option value="7">Saturday</option>
           </select-input>
           <label style="margin-left: 13px;    margin-right: 7px;"  class="pb-8 pr-6 w-full lg:w-1/02" >From</label>
           <select-input v-model="form.AvailabilityFrom" :error="form.errors.AvailabilityFrom"  class="pb-8 pr-6 w-full lg:w-1/02" style="margin-left: -58px;width: 219%;"  >
@@ -199,10 +199,10 @@
           <label  class="pb-8 pr-6 w-full lg:w-1/02" style=" width: 31%;" >Consultaion Time</label>
           <select-input v-model="form.Leave" :error="form.errors.Leave"  class="pb-8 pr-6 w-full lg:w-1/02" style="    margin-left: -76px;width: 219%;" >
             
-            <option value="10:00 Min">10:00 Min</option>
-            <option value="15:00 Min">15:00 Min</option>
-            <option value="30:00 Min">30:00 Min</option>
-            <option value="45:00 Min">30:00 Min</option>
+            <option value="10:00">10:00 Min</option>
+            <option value="15:00">15:00 Min</option>
+            <option value="30:00">30:00 Min</option>
+            <option value="45:00">30:00 Min</option>
           </select-input>
           <datetime format="MM/DD/YYYY" width="300px" v-model="val"></datetime>
         <app-layout>

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+Use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -11,16 +11,17 @@ class DoctorsController extends Controller
     {
        // return Inertia::render('Doctor/Index');
         return Inertia::render('Doctor/Index', [
-            'contact' => [
-                'doctor_id' => $contact->doctor_id,
-                'break_Day' => $contact->break_Day,
-                'break_Fromtime' => $contact->break_Fromtime,
-                'break_Totime' => $contact->break_Totime,
-                'leave_FromDate' => $contact->leave_FromDate,
-                'leave_ToDate' => $contact->leave_ToDate,
-                'availability' => $contact->availability,
-                'consultation' => $contact->consultation,               
-            ]
+            'doctor' => Auth::user()->account->Doctors()
+            ->through(fn ($doctor) => [
+                'doctor_id' => $doctor->doctor_id,
+                'break_Day' => $doctor->break_Day,
+                'break_Fromtime' => $doctor->break_Fromtime,
+                'break_Totime' => $doctor->break_Totime,
+                'leave_FromDate' => $doctor->leave_FromDate,
+                'leave_ToDate' => $doctor->leave_ToDate,
+                'availability' => $doctor->availability,
+                'consultation' => $doctor->consultation,               
+            ])
         ]);
     }
 }
