@@ -176,3 +176,15 @@ Route::get('calendar_appointments', [ClientsController::class, 'calendar_appoint
 Route::get('appointments', [AppointmentsController::class, 'index'])
     ->name('appointments')
     ->middleware('auth');
+
+Route::get('appointments/create', [AppointmentsController::class, 'create'])
+    ->name('appointments.create')
+    ->middleware('auth');
+
+Route::post('appointments', [AppointmentsController::class, 'store'])
+    ->name('appointments.store')
+    ->middleware('auth');
+    
+Route::get('appointments/{appointment}/edit', [AppointmentsController::class, 'edit'])
+    ->name('appointments.edit')
+    ->middleware('auth');

@@ -23,6 +23,10 @@
         <icon name="users" class="mr-2 w-4 h-4" :class="isUrl('doctor') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
         <div :class="isUrl('doctor') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Doctor</div>
       </Link>
+      <Link class="group flex items-center py-3" href="/appointments">
+        <icon name="appointments" class="mr-2 w-4 h-4" :class="isUrl('appointments') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('appointments') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Appointments</div>
+      </Link>
     </div>
     <div class="mb-4">
       <Link class="group flex items-center py-3" href="/reports">
