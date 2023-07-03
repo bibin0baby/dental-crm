@@ -88455,10 +88455,6 @@ input:focus, input:active, select:focus, select:active, textarea:focus, textarea
     width: 50%;
   }
 
-  .lg\:w-1\/02 {
-    width: 13%;
-  }
-
   .lg\:w-1\/3 {
     width: 33.333333%;
   }

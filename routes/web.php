@@ -150,6 +150,11 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
 Route::get('doctor', [DoctorsController::class, 'index'])
     ->name('doctor')
     ->middleware('auth');
+    
+
+Route::get('doctor', [DoctorsController::class, 'doctoravailability'])
+    ->name('doctor.doctoravailability')
+    ->middleware('auth');
 
 // Receptionist
 

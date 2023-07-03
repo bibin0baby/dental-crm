@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Doctors extends Model
+class Doctor extends Model
 {
     use HasFactory;
     use SoftDeletes;
     
-    public function appointments()
+      public function appointments()
     {
         return $this->hasMany(Appointment::class);
     }
@@ -62,4 +62,5 @@ class Doctors extends Model
             }
         });
     }
+    
 }
