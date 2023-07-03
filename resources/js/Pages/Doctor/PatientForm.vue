@@ -205,13 +205,13 @@
             <option value="45:00">30:00 Min</option>
           </select-input>
           <datetime format="MM/DD/YYYY" width="300px" v-model="val"></datetime>
-        <app-layout>
-    <template #header>
-      <h1>Calendar</h1>
-    </template>
+        <!-- <app-layout>
+          <template #header>
+            <h1>Calendar</h1>
+          </template>
 
-    <calendar></calendar>
-  </app-layout>
+          <calendar></calendar>
+        </app-layout> -->
         </div>
 
         <div class="flex items-center justify-end px-8 py-4 bg-gray-50 border-t border-gray-100">
@@ -228,7 +228,7 @@ import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
-import datetime from 'vuejs-datetimepicker';
+import Datetime from 'vuejs-datetimepicker'
 
 export default {
   components: {
@@ -237,7 +237,7 @@ export default {
     LoadingButton,
     SelectInput,
     TextInput,
-    datetime 
+    Datetime 
   },
   layout: Layout,
   props: {

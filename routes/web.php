@@ -165,8 +165,12 @@ Route::get('receptionist', [ReceptionistsController::class, 'index'])
 // Client
 
 Route::get('client/{doc_id}', [ClientsController::class, 'index'])
-    ->name('client');
+    ->name('client')
+    ->middleware('guest');
 
+Route::get('calendar_appointments', [ClientsController::class, 'calendar_appointments'])
+        ->name('calendar-appointments')
+        ->middleware('guest');
 //appointments
 
 Route::get('appointments', [AppointmentsController::class, 'index'])

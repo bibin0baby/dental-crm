@@ -14,4 +14,12 @@ class ClientsController extends Controller
     {
         return Inertia::render('Clients/Index');
     }
+
+    public function calendar_appointments()
+    {
+        $events = array(
+            
+        );
+        return $events;
+    }
 }
