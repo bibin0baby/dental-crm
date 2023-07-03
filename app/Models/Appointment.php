@@ -21,7 +21,7 @@ class Appointment extends Model
         return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
 
-    public function doctor()
+    public function doctors()
     {
         return $this->belongsTo(Doctor::class);
     }

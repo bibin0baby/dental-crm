@@ -49,6 +49,11 @@ class User extends Authenticatable
         return $this->belongsTo(Account::class);
     }
 
+    public function doctor()
+    {
+        return $this->belongsTo(Doctor::class);
+    }
+
     public function getNameAttribute()
     {
         return $this->first_name.' '.$this->last_name;
