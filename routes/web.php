@@ -147,13 +147,13 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
 
 // Doctors
 
-Route::get('doctor', [DoctorsController::class, 'index'])
-    ->name('doctor')
+Route::get('doctors', [DoctorsController::class, 'index'])
+    ->name('doctors')
     ->middleware('auth');
     
 
-Route::get('doctor', [DoctorsController::class, 'doctoravailability'])
-    ->name('doctor.doctoravailability')
+Route::get('doctoravailability', [DoctorsController::class, 'doctoravailability'])
+    ->name('doctors.doctoravailability')
     ->middleware('auth');
 
 // Receptionist
