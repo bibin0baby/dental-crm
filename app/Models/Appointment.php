@@ -21,7 +21,7 @@ class Appointment extends Model
         return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
 
-    public function doctor()
+    public function doctors()
     {
         return $this->belongsTo(Doctor::class);
     }
@@ -47,9 +47,9 @@ class Appointment extends Model
             $query->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%'.$search.'%')
                     ->orWhere('description', 'like', '%'.$search.'%')
-                    ->orWhereHas('doctor', function ($query) use ($search) {
-                        $query->where('name', 'like', '%'.$search.'%');
-                    })
+                    ->orWhere('photo_path', 'like', '%'.$search.'%')
+                    ->orWhere('doctor_id', 'like', '%'.$search.'%')
+                   
                     ->orWhereHas('contact', function ($query) use ($search) {
                         $query->where('name', 'like', '%'.$search.'%');
                     });

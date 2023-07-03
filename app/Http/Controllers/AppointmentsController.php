@@ -21,7 +21,7 @@ class AppointmentsController extends Controller
         return Inertia::render('Appointments/Index', [
             'filters' => Request::all('search', 'trashed'),
             'appointments' => Auth::user()->account->appointments()
-                ->with('doctors', 'contacts')
+           // ->with('doctors', 'contacts')
                 ->orderByName()
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate(10)
@@ -32,7 +32,8 @@ class AppointmentsController extends Controller
                     'description' => $appointment->description,
                     'scheduled_at' => $appointment->scheduled_at,
                     'duration' => $appointment->duration,
-                    'doctor' => $appointment->doctor ? $appointment->doctor->only('name') : null,
+                   'photo_path' => $appointment->photo_path,
+                  'doctor_id' => $appointment->doctor_id,
                     'contact' => $appointment->contact ? $appointment->contact->only('name') : null,
                 ]),
         ]);
@@ -45,7 +46,15 @@ class AppointmentsController extends Controller
      */
     public function create()
     {
-        //
+      
+        return Inertia::render('Appointments/Create', [
+            'contacts' => Auth::user()->account
+                ->contacts()
+                ->orderBy('name')
+                ->get()
+                ->map
+                ->only('id', 'name'),
+        ]);
     }
 
     /**
@@ -56,7 +65,24 @@ class AppointmentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Auth::user()->account->appointments()->create(
+            Request::validate([
+              
+                'title' => ['required', 'max:50'],
+                'description' => ['nullable', 'max:150'],
+               
+                'scheduled_at' => ['required', 'max:50'],
+                'duration' => ['nullable', 'max:50'],
+                'photo_path' => ['nullable', 'max:150'],
+                'doctor_id' => ['required', 'max:50'],
+                'contact_id' => ['required', Rule::exists('contacts', 'id')->where(function ($query) {
+                    $query->where('account_id', Auth::user()->account_id);
+                })],
+               
+            ])
+        );
+
+        return Redirect::route('appointments')->with('success', 'Appointment Booked.');
     }
 
     /**
@@ -78,7 +104,24 @@ class AppointmentsController extends Controller
      */
     public function edit(Appointment $appointment)
     {
-        //
+        return Inertia::render('Appointments/Edit', [
+            'Appointment' => [
+                'id' => $appointment->id,
+                'title' => $appointment->title,
+                'description' => $appointment->description,
+                'scheduled_at' => $appointment->scheduled_at,
+                'duration' => $appointment->duration,
+                'photo_path' => $appointment->photo_path,
+                'doctor_id' => $appointment->doctor_id,
+                'contact_id' => $appointment->contact_id,
+               
+            ],
+            'contacts' => Auth::user()->account->contacts()
+                ->orderBy('first_name')
+                ->get()
+                ->map
+                ->only('id', 'first_name'),
+        ]);
     }
 
     /**

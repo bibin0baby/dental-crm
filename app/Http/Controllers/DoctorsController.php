@@ -30,8 +30,15 @@ class DoctorsController extends Controller
 
     public function doctorAvailability(Request $request)
     {
+        //$user = Auth::user();
+        //echo "<pre>";print_r($user);echo "</pre>";
         return Inertia::render('Doctor/DoctorAvailability', [
-            'doctor' => Auth::user()->account->Doctor()
+            'doctor' => Auth::user()->doctor_availability()
+                ->with('organization')
+                ->orderByName()
+                ->filter($request->only('search', 'trashed'))
+                ->paginate(10)
+                ->withQueryString()
                 ->through(fn ($doctor) => [
                     'doctor_id' => $doctor->doctor_id,
                     'break_Day' => $doctor->break_Day,

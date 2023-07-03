@@ -6,14 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Doctor extends Model
+class Doctor_availability extends Model
 {
     use HasFactory;
     use SoftDeletes;
     
-      public function appointments()
+    protected $table = 'doctor_availability';
+    public function doctoravailabilities()
     {
-        return $this->hasMany(Appointment::class);
+        return $this->hasMany(Doctor_availability::class);
     }
 
     public function resolveRouteBinding($value, $field = null)
@@ -21,7 +22,7 @@ class Doctor extends Model
         return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
 
-    public function doctor()
+    public function doctors()
     {
         return $this->belongsTo(Doctor::class);
     }
