@@ -6,13 +6,22 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use DateTime;
 
 class ClientsController extends Controller
 {
     public function index(Request $request, $doc_id)
     {
-        return Inertia::render('Clients/Index');
+        $appointments = DB::table('appointments')
+            ->select('*')
+            ->where('doctor_id', $doc_id)
+            ->where('scheduled_at > ', new Datetime())
+            ->get();
+        return Inertia::render('Clients/Index', [
+            'appointments' => $appointments
+        ]);
     }
 
     public function calendar_appointments()

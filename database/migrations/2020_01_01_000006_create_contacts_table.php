@@ -26,6 +26,7 @@ class CreateContactsTable extends Migration
             $table->string('region', 50)->nullable();
             $table->string('country', 2)->nullable();
             $table->string('postal_code', 25)->nullable();
+            $table->string('comments', 500)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

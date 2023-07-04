@@ -7,7 +7,8 @@
       <!-- use the modal component, pass in the prop -->
       <modal :show="showModal" @close="showModal = false">
         <template #header>
-          <h3>custom header</h3>
+          <h3>Let us know more about you...</h3>
+          <h3>Appointment Date Time is: </h3>{{ appointments_dt }}
           <form @submit.prevent="store">
             <div class="flex flex-wrap -mb-8 -mr-6 p-8">
               <text-input v-model="form.first_name" :error="form.errors.first_name" class="pb-8 pr-6 w-full lg:w-1/2" label="First name" />
@@ -22,10 +23,11 @@
                 <option value="UK">UK</option>
                 <option value="US">United States</option>
               </select-input>
+              <text-input v-model="form.comments" :error="form.errors.region" class="pb-8 pr-6 w-full lg:w-1/2" label="Province/State" />
               <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pb-8 pr-6 w-full lg:w-1/2" label="Postal code" />
             </div>
             <div class="flex items-center justify-end px-8 py-4 bg-gray-50 border-t border-gray-100">
-              <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Contact</loading-button>
+              <loading-button :loading="form.processing" class="btn-indigo" type="submit">Schedule My appointment</loading-button>
             </div>
           </form>
         </template>
@@ -67,12 +69,13 @@ export default {
   props: {
     //showModal : false
     //filters: Object,
-    //appointments: Object,
+    appointments: Object,
   },
   remember: 'form',
   data() {
     return {
       showModal : false,
+      appointments_dt: '',
       calendarOptions: {
         plugins: [ dayGridPlugin, interactionPlugin, timeGridPlugin ],
         initialView: 'timeGridWeek',
@@ -87,7 +90,7 @@ export default {
         selectMinDistance: 1,
         dateClick: this.handleDateClick,
         slotDuration: '00:15:00',
-        events: this.$inertia.get('/calendar_appointments')
+        events: this.appointments
       },
       form: this.$inertia.form({
         first_name: '',
@@ -100,6 +103,7 @@ export default {
         region: '',
         country: '',
         postal_code: '',
+        comments: '',
       }),
     }
   },
@@ -114,10 +118,8 @@ export default {
   methods: {
     handleDateClick: function(arg) {
       //alert('date click! ' + arg.dateStr);
+      appointments_dt = arg
       this.showModal = true;
-    },
-    handleSlotClick: function(selectionInfo) {
-      alert('date click! ' + selectionInfo.dateStr)
     },
     store() {
       this.form.post('/client')
