@@ -8,9 +8,9 @@
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="store">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
-          <label  class="pb-8 pr-6 w-full lg:w-1/02"  >Availability</label>
-          <label style="margin-left: 13px;    margin-right: 7px;"  class="pb-8 pr-6 w-full lg:w-1/02" >Days</label>
-          <select-input v-model="form.AvailabilityDays" :error="form.errors.AvailabilityDays"   class="pb-8 pr-6 w-full lg:w-1/02" style="margin-left: -58px;width: 219%;"  >
+          <label  class="pb-8 pr-6  lg:w-1/05"  >Availability</label>
+          <label  class="pb-8 pr-6  lg:w-1/05" >Days</label>
+          <select-input v-model="form.AvailabilityDays" :error="form.errors.AvailabilityDays"   class="pb-8 pr-6  lg:w-1/05"   >
             
             <option value="Sunday">Sunday</option>
             <option value="Monday">Monday</option>
@@ -20,8 +20,8 @@
             <option value="Friday">Friday</option>
             <option value="Saturday">Saturday</option>
           </select-input>
-          <label style="margin-left: 13px;    margin-right: 7px;"  class="pb-8 pr-6 w-full lg:w-1/02" >From</label>
-          <select-input v-model="form.AvailabilityFrom" :error="form.errors.AvailabilityFrom"  class="pb-8 pr-6 w-full lg:w-1/02" style="margin-left: -58px;width: 219%;"  >
+          <label  class="pb-8 pr-6  lg:w-1/05" >From</label>
+          <select-input v-model="form.AvailabilityFrom" :error="form.errors.AvailabilityFrom"  class="pb-8 pr-6  lg:w-1/05"   >
             <option value="09:00 AM">09:00 AM</option>
             <option value="09:30 AM">09:30 AM</option>
             <option value="10:00 AM">10:00 AM</option>
@@ -48,8 +48,8 @@
             <option value="08:30 AM">08:30 PM</option>
             <option value="09:00 AM">09:00 PM</option>
           </select-input>
-          <label style="margin-left: 13px;    margin-right: 7px;"  class="pb-8 pr-6 w-full lg:w-1/02" >To</label>
-          <select-input v-model="form.AvailabilityTo" :error="form.errors.AvailabilityTo" style="margin-left: -58px;width: 219%;"  class="pb-8 pr-6 w-full lg:w-1/02"  >
+          <label  class="pb-8 pr-6  lg:w-1/05" >To</label>
+          <select-input v-model="form.AvailabilityTo" :error="form.errors.AvailabilityTo"   class="pb-8 pr-6  lg:w-1/05"  >
            
             <option value="09:00 AM">09:00 AM</option>
             <option value="09:30 AM">09:30 AM</option>
@@ -77,9 +77,9 @@
             <option value="08:30 AM">08:30 PM</option>
             <option value="09:00 AM">09:00 PM</option>
           </select-input>
-          <label  class="pb-8 pr-6 w-full lg:w-1/02" style="    width: 15%;" > Break Time</label>
-          <label  class="pb-8 pr-6 w-full lg:w-1/02" > From</label>
-          <select-input v-model="form.BreakFrom" :error="form.errors.BreakFrom" style="margin-left: -54px;width: 219%;"   class="pb-8 pr-6 w-full lg:w-1/02"  >
+          <label  class="pb-8 pr-6  lg:w-1/05" > Break Time</label>
+          <label  class="pb-8 pr-6  lg:w-1/05" > From</label>
+          <select-input v-model="form.BreakFrom" :error="form.errors.BreakFrom"  style="    margin-right: 22px; margin-left: -6px;" class="pb-8 pr-6  lg:w-1/05"  >
            
             <option value="09:00 AM">09:00 AM</option>
             <option value="09:30 AM">09:30 AM</option>
@@ -107,8 +107,8 @@
             <option value="08:30 AM">08:30 PM</option>
             <option value="09:00 AM">09:00 PM</option>
           </select-input>
-          <label  class="pb-8 pr-6 w-full lg:w-1/02" style="margin-left: 20px;" > To</label>
-          <select-input v-model="form.BreakTo" :error="form.errors.BreakFrom"  class="pb-8 pr-6 w-full lg:w-1/02" style="margin-left: -53px;width: 219%;" >
+          <label  class="pb-8 pr-6  lg:w-1/05"  > To</label>
+          <select-input v-model="form.BreakTo" :error="form.errors.BreakFrom" style="   margin-left: 13px;    width: 78%; margin-right: 20px;" class="pb-8 pr-6  lg:w-1/05" >
             
             <option value="09:00 AM">09:00 AM</option>
             <option value="09:30 AM">09:30 AM</option>
@@ -137,9 +137,9 @@
             <option value="09:00 AM">09:00 PM</option>
           </select-input>
           
-          <label  class="pb-8 pr-6 w-full lg:w-1/02" style="width: 31%;" > Leave</label>
-          <label  class="pb-8 pr-6 w-full lg:w-1/02" style="margin-left: -117px;"> From</label>
-          <select-input v-model="form.Leave" :error="form.errors.Leave" style="margin-left: -54px;width: 219%;"   class="pb-8 pr-6 w-full lg:w-1/02"  >
+          <label  class="pb-8 pr-6  lg:w-1/05" style="width: 34%;" > Leave</label>
+          <label  class="pb-8 pr-6  lg:w-1/05" style="margin-left: -150px;margin-right: 0px;"> From</label>
+          <select-input v-model="form.Leave" :error="form.errors.Leave"  style=" margin-right: 18PX;width: 97%;"  class="pb-8 pr-6  lg:w-1/05"  >
             
             <option value="09:00 AM">09:00 AM</option>
             <option value="09:30 AM">09:30 AM</option>
@@ -167,8 +167,8 @@
             <option value="08:30 AM">08:30 PM</option>
             <option value="09:00 AM">09:00 PM</option>
           </select-input>
-          <label  class="pb-8 pr-6 w-full lg:w-1/02" style="margin-left: 20px;" > To</label>
-          <select-input v-model="form.Leave" :error="form.errors.Leave"  class="pb-8 pr-6 w-full lg:w-1/02" style="margin-left: -53px;width: 219%;" >
+          <label  class="pb-8 pr-6  lg:w-1/05" style="    margin-right: 18PX;" > To</label>
+          <select-input v-model="form.Leave" :error="form.errors.Leave"  class="pb-8 pr-6  lg:w-1/05"  >
             
             <option value="09:00 AM">09:00 AM</option>
             <option value="09:30 AM">09:30 AM</option>
@@ -196,8 +196,9 @@
             <option value="08:30 AM">08:30 PM</option>
             <option value="09:00 AM">09:00 PM</option>
           </select-input>
-          <label  class="pb-8 pr-6 w-full lg:w-1/02" style=" width: 31%;" >Consultaion Time</label>
-          <select-input v-model="form.Leave" :error="form.errors.Leave"  class="pb-8 pr-6 w-full lg:w-1/02" style="    margin-left: -76px;width: 219%;" >
+          <label  class="pb-8 pr-6  lg:w-1/05" style="width: 34%;" >Consultaion Time</label>
+          <select-input v-model="form.Leave" :error="form.errors.Leave"  class="pb-8 pr-6  lg:w-1/05" style="margin-left: -88px;
+    margin-right: 100px;"  >
             
             <option value="10:00 Min">10:00 Min</option>
             <option value="15:00 Min">15:00 Min</option>
