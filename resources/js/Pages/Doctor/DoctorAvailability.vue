@@ -247,7 +247,7 @@ export default {
   data() {
     return {
       form: this.$inertia.form({
-        doctor_id,
+        doctor_id: '',
         break_Day: '',
         break_Fromtime: '',
         break_Totime: '',
