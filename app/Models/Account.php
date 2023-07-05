@@ -25,8 +25,15 @@ class Account extends Model
     {
         return $this->hasMany(Appointment::class);
     }
-    public function doctoravailabilities()
+    public function availabilitys()
     {
-        return $this->hasMany(Doctor_availability::class);
+        return $this->hasMany(Availability::class);
     }
+
+    // public function doctoravailabilities()
+    // {
+    //     return $this->hasMany(Doctor_availability::class);
+    // }
+
+   
 }

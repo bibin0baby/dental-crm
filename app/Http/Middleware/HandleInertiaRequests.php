@@ -36,6 +36,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+        //echo "<pre>";print_r($request->user());exit;
         return array_merge(parent::share($request), [
             'auth' => function () use ($request) {
                 return [
@@ -46,8 +47,8 @@ class HandleInertiaRequests extends Middleware
                         'email' => $request->user()->email,
                         'owner' => $request->user()->owner,
                         'account' => [
-                            'id' => $request->user()->account->id,
-                            'name' => $request->user()->account->name,
+                            'id' => ($request->user()->account) ? $request->user()->account->id : '',
+                            'name' => ($request->user()->account) ? $request->user()->account->name : '',
                         ],
                     ] : null,
                 ];

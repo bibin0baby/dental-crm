@@ -6,30 +6,34 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Doctor_availability extends Model
+class Availability extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
-    protected $table = 'doctor_availability';
-    public function doctoravailabilities()
-    {
-        return $this->hasMany(Doctor_availability::class);
-    }
+
+    protected $table = 'availabilitys'; // Specify the correct table name
+
+    protected $fillable = [
+        'doctor_id',
+        'availabilityDays',
+        'availabilityFrom',
+        'availabilityTo',
+        'break_Fromtime',
+        'break_Totime',
+        'leave_FromDate',
+        'leave_ToDate',       
+        'ConsultaionTime',
+        'organization_id',
+    ];
 
     public function resolveRouteBinding($value, $field = null)
     {
         return $this->where($field ?? 'id', $value)->withTrashed()->firstOrFail();
     }
 
-    public function doctors()
+    public function organization()
     {
-        return $this->belongsTo(Doctor::class);
-    }
-
-    public function contact()
-    {
-        return $this->belongsTo(Contact::class);
+        return $this->belongsTo(Organization::class);
     }
 
     public function getNameAttribute()
@@ -46,12 +50,10 @@ class Doctor_availability extends Model
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
-                $query->where('title', 'like', '%'.$search.'%')
-                    ->orWhere('description', 'like', '%'.$search.'%')
-                    ->orWhereHas('doctor', function ($query) use ($search) {
-                        $query->where('name', 'like', '%'.$search.'%');
-                    })
-                    ->orWhereHas('contact', function ($query) use ($search) {
+                $query->where('first_name', 'like', '%'.$search.'%')
+                    ->orWhere('last_name', 'like', '%'.$search.'%')
+                    ->orWhere('email', 'like', '%'.$search.'%')
+                    ->orWhereHas('organization', function ($query) use ($search) {
                         $query->where('name', 'like', '%'.$search.'%');
                     });
             });
@@ -63,5 +65,4 @@ class Doctor_availability extends Model
             }
         });
     }
-    
 }
