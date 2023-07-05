@@ -21,7 +21,7 @@ class AppointmentsController extends Controller
         return Inertia::render('Appointments/Index', [
             'filters' => Request::all('search', 'trashed'),
             'appointments' => Auth::user()->account->appointments()
-           // ->with('doctors', 'contacts')
+            ->with('contact')
                 ->orderByName()
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate(10)
@@ -65,6 +65,7 @@ class AppointmentsController extends Controller
      */
     public function store(Request $request)
     {
+        
         Auth::user()->account->appointments()->create(
             Request::validate([
               
@@ -105,7 +106,7 @@ class AppointmentsController extends Controller
     public function edit(Appointment $appointment)
     {
         return Inertia::render('Appointments/Edit', [
-            'Appointment' => [
+            'appointment' => [
                 'id' => $appointment->id,
                 'title' => $appointment->title,
                 'description' => $appointment->description,
@@ -133,7 +134,29 @@ class AppointmentsController extends Controller
      */
     public function update(Request $request, Appointment $appointment)
     {
-        //
+        $appointment->update(
+            Request::validate([
+                'title' => ['required', 'max:50'],
+                'description' => ['nullable', 'max:50'],
+                'contact_id' => [
+                    'required',
+                    Rule::exists('contacts', 'id')->where(fn ($query) => $query->where('account_id', Auth::user()->account_id)),
+                ],
+                'scheduled_at' => ['required', 'max:50', 'email'],
+                'duration' => ['nullable', 'max:50'],
+                'photo_path' => ['nullable', 'max:150'],
+                'doctor_id' => ['required', 'max:50'],
+              
+            ])
+        );
+
+        return Redirect::back()->with('success', 'Appointment updated.');
+    }
+    public function restore(Appointment $appointment)
+    {
+        $appointment->restore();
+
+        return Redirect::back()->with('success', 'appointment restored.');
     }
 
     /**
@@ -144,6 +167,8 @@ class AppointmentsController extends Controller
      */
     public function destroy(Appointment $appointment)
     {
-        //
+        $appointment->delete();
+
+        return Redirect::route('appointments')->with('success', 'Appointment deleted.');
     }
 }

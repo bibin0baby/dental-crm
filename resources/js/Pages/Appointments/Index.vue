@@ -30,9 +30,10 @@
         
         <tr v-for="appointment in appointments.data" :key="appointment.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
-            <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/appointments/${appointment.id}/edit`">
-              {{ appointment.contact}}
-              <icon v-if="appointment.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
+            <Link class="flex items-center px-6 py-4" :href="`/appointments/${appointment.id}/edit`" tabindex="-1">
+              <div v-if="appointment.contact">
+                {{ appointment.contact.name }}
+              </div>
             </Link>
           </td>
           <td class="border-t">
@@ -40,7 +41,7 @@
               {{ appointment.title }}
               <icon v-if="appointment.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
             </Link>
-          </td>
+          </td> 
           <!-- <td class="border-t">
             <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/appointments/${appointment.id}/edit`">
               {{ appointment.description }}
@@ -73,24 +74,24 @@
           </td> -->
          
           
-          <!-- <td class="border-t">
+           <td class="border-t">
             <Link class="flex items-center px-6 py-4" :href="`/appointments/${appointment.id}/edit`" tabindex="-1">
               <div v-if="appointment.organization">
                 {{ appointment.organization.name }}
               </div>
             </Link>
           </td>
-          <td class="border-t">
+          <!-- <td class="border-t">
             <Link class="flex items-center px-6 py-4" :href="`/contacts/${contact.id}/edit`" tabindex="-1">
               {{ contact.city }}
             </Link>
-          </td>
-          <td class="border-t">
+          </td> -->
+          <!-- <td class="border-t">
             <Link class="flex items-center px-6 py-4" :href="`/contacts/${contact.id}/edit`" tabindex="-1">
               {{ contact.phone }}
             </Link>
-          </td>
-           -->
+          </td> -->
+           
            <td class="w-px border-t">
             <Link class="flex items-center px-4" :href="`/appointments/${appointment.id}/edit`" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />

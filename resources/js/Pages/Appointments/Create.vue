@@ -12,8 +12,22 @@
          
           <text-input v-model="form.title" :error="form.errors.title" class="pb-8 pr-6 w-full lg:w-1/2" label="Treatment Type" />
           <text-input v-model="form.description" :error="form.errors.description" class="pb-8 pr-6 w-full lg:w-1/2" label="Description" />
-          <text-input v-model="form.scheduled_at" :error="form.errors.scheduled_at" class="pb-8 pr-6 w-full lg:w-1/2" label="scheduled at" />
-          <text-input v-model="form.duration" :error="form.errors.duration" class="pb-8 pr-6 w-full lg:w-1/2" label="Duration" />
+          <!-- <text-input v-model="form.scheduled_at" :error="form.errors.scheduled_at"  class="pb-8 pr-6 w-full lg:w-1/2" label="scheduled at" /> -->
+          <label class="pb-8 pr-6 w-full lg:w-1/2" >Scheduled at: <br><br>
+
+        <input type="datetime-local" v-model="form.scheduled_at" :error="form.errors.scheduled_at"  class="pb-8 pr-6 w-full lg:w-1/2" label="scheduled at"/>
+      </label><!-- <datetime type='atetime-local' v-model="form.scheduled_at" :error="form.errors.scheduled_at" class="pb-8 pr-6 w-full lg:w-1/2" label="scheduled at"  >scheduled at</datetime> -->
+      <select-input v-model="form.duration" :error="form.errors.duration" class="pb-8 pr-6 w-full lg:w-1/2" label="duration">
+            <option :value="null" />
+            <option > 15 minutes</option>
+            <option > 30 minutes</option>
+            <option > 45 minutes</option>
+            <option > 1 hour</option>
+            <option > 1 hour 30 minutes</option>
+            <option > 2 hours</option>
+            <option > 3 hours</option>
+
+          </select-input>
           <text-input v-model="form.photo_path" :error="form.errors.photo_path" class="pb-8 pr-6 w-full lg:w-1/2" label="Photo" />
           <text-input v-model="form.doctor_id" :error="form.errors.doctor_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Doctor" />
           <select-input v-model="form.contact_id" :error="form.errors.contact_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Patient Name">
