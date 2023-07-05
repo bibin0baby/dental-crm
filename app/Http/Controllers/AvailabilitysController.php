@@ -73,24 +73,48 @@ class AvailabilitysController extends Controller
         //         'ConsultaionTime' => ['nullable', 'max:100'],
         // ]);
         
-        Auth::user()->account->availabilitys()->create([
-           // Request::validate([
-                'doctor_id' => ['nullable','integer'],
-                'availabilityDays' => ['nullable','max:100'],
-                'availabilityFrom' => ['nullable', 'max:100'],
-                'availabilityTo' => ['nullable','max:100'],
-                'break_Fromtime' => ['nullable', 'max:100'],
-                'break_Totime' => ['nullable','max:100'],
-                'leave_FromDate' => ['nullable', 'max:100'],
-                'leave_ToDate' => ['nullable', 'max:100'],
-                'ConsultaionTime' => ['nullable', 'max:100'],
+        // Auth::user()->account->availabilitys()->create([
+        //    // Request::validate([
+        //         'doctor_id' => ['nullable','integer'],
+        //         'availabilityDays' => ['nullable','max:100'],
+        //         'availabilityFrom' => ['nullable', 'max:100'],
+        //         'availabilityTo' => ['nullable','max:100'],
+        //         'break_Fromtime' => ['nullable', 'max:100'],
+        //         'break_Totime' => ['nullable','max:100'],
+        //         'leave_FromDate' => ['nullable', 'max:100'],
+        //         'leave_ToDate' => ['nullable', 'max:100'],
+        //         'ConsultaionTime' => ['nullable', 'max:100'],
+        //         'organization_id' => ['nullable', Rule::exists('organizations', 'id')->where(function ($query) {
+        //             $query->where('account_id', Auth::user()->account_id);
+        //         })],
+        //    // ])
+        // ]);
+
+        // return Redirect::route('availabilitys')->with('success', 'Doctor schedule created.');  
+        
+        Auth::user()->account->availabilitys()->create(
+            Request::validate([
+                'availabilityDays' => ['required', 'max:50'],
+                'availabilityFrom' => ['required', 'max:50'],
                 'organization_id' => ['nullable', Rule::exists('organizations', 'id')->where(function ($query) {
                     $query->where('account_id', Auth::user()->account_id);
                 })],
-           // ])
-        ]);
+                'availabilityTo' => ['nullable', 'max:50'],
+                'break_Fromtime' => ['nullable', 'max:50'],
+                'break_Totime' => ['nullable', 'max:150'],
+                'leave_FromDate' => ['nullable', 'max:50'],
+                'leave_ToDate' => ['nullable', 'max:50'],
+                'ConsultaionTime' => ['nullable', 'max:50'],
+            ])
+        );
 
-        return Redirect::route('availabilitys')->with('success', 'Doctor schedule created.');       
+        try {
+            Auth::user()->account->availabilitys()->create($request);
+        } catch (\Exception $e) {
+            return Redirect::back()->withInput()->withErrors(['error' => 'Failed to create doctor schedule.']);
+        }
+    
+        return Redirect::route('availabilitys')->with('success', 'Contact test created.');
     }
 
     public function edit(Availability $availabilitys)
@@ -106,7 +130,7 @@ class AvailabilitysController extends Controller
                 'leave_FromDate' => $availabilitys->leave_FromDate,
                 'leave_ToDate' => $availabilitys->leave_ToDate,
                 'ConsultaionTime' => $availabilitys->ConsultaionTime,
-                'city' => $availabilitys->city,
+                'doctor_id' => $availabilitys->doctor_id,
                 'deleted_at' => $availabilitys->deleted_at,
             ],
             'organizations' => Auth::user()->account->organizations()
@@ -121,14 +145,14 @@ class AvailabilitysController extends Controller
     {
         $availability->update(
             Request::validate([
-                'availabilityDays' => ['nullable', 'max:100'],
-                'availabilityFrom' => ['nullable', 'max:100'],
-                'availabilityTo' => ['nullable', 'max:100'],
-                'break_Fromtime' => ['nullable', 'max:100'],
-                'break_Totime' => ['nullable', 'max:100'],
-                'leave_FromDate' => ['nullable', 'max:100'],
-                'leave_ToDate' => ['nullable', 'max:100'],
-                'ConsultaionTime' => ['nullable', 'max:100'],
+                'availabilityDays' => ['required', 'max:100'],
+                'availabilityFrom' => ['required', 'max:100'],
+                'availabilityTo' => ['required', 'max:100'],
+                'break_Fromtime' => ['required', 'max:100'],
+                'break_Totime' => ['required', 'max:100'],
+                'leave_FromDate' => ['required', 'max:100'],
+                'leave_ToDate' => ['required', 'max:100'],
+                'ConsultaionTime' => ['required', 'max:100'],
                 'organization_id' => [
                     'nullable',
                     Rule::exists('organizations', 'id')->where(fn ($query) => $query->where('account_id', Auth::user()->account_id)),

@@ -30,10 +30,10 @@ class Account extends Model
         return $this->hasMany(Availability::class);
     }
 
-    // public function doctoravailabilities()
-    // {
-    //     return $this->hasMany(Doctor_availability::class);
-    // }
+    public function doctors()
+    {
+        return $this->hasMany(Doctor::class);
+    }
 
    
 }

@@ -18,13 +18,13 @@
         <div :class="isUrl('contacts') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Patients</div>
       </Link>
     </div>
-    <!-- <div class="mb-4">
+    <div class="mb-4">
       <Link class="group flex items-center py-3" href="/doctors">
-        <icon name="users" class="mr-2 w-4 h-4" :class="isUrl('doctorman') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <icon name="users" class="mr-2 w-4 h-4" :class="isUrl('doctors') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
         <div :class="isUrl('doctor') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Doctor</div>
       </Link>
 
-    </div>     -->
+    </div>    
 
     <div class="mb-4">
       <Link class="group flex items-center py-3" href="/appointments">

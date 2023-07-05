@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Availability;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
@@ -83,7 +84,7 @@ class ClientsController extends Controller
                 'duration' => $duration->format('%H:%I:%S'),
             ]
         );
-
+       
         return redirect()->route('client.index')
         ->with('message', 'Post created successfully.');
     }
