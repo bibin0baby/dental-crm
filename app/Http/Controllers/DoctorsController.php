@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 Use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Illuminate\Validation\Rule;
@@ -20,35 +21,21 @@ class DoctorsController extends Controller
         //     'doctor' => $doctors
         // ]);
         return Inertia::render('Doctor/Index', [
-            'filters' => $request->all('search', 'trashed'),
-            'doctor' => Auth::user()->account->users()
-                ->orderByName()
-                ->filter($request->only('search', 'trashed'))
-                ->join('permissions', 'users.id', '=', 'permissions.id')
-                  ->join('roles', 'permissions.id', '=', 'roles.id')
-                  ->where('roles.name', 'doctor')
-                //->where('roles.name', 'doctor')
-                // ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-                // ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
-                // ->join('model_has_permissions', 'users.id', '=', 'model_has_permissions.model_id')
-                // ->join('permissions', 'model_has_permissions.permission_id', '=', 'permissions.id')
-                // ->where('roles.name', 'standard')
-                ->paginate(10)
-                ->withQueryString()
-                ->through(fn ($doctor) => [
-                    'id' => $doctor->id,
-                    'name' => $doctor->name,
-                    'phone' => $doctor->phone,
-                    'city' => $doctor->city,
-                    'deleted_at' => $doctor->deleted_at,
-                    'owner' => $doctor->owner,
-                    'role' => $doctor->roles,
-                    'roles' => 'Doctor',
-                   // 'roles'  => ($doctor->roles->pluck('name')[0] == 'doctor') ? 'Doctor' : ucfirst($doctor->roles->pluck('name')[0]),
-                    'photo' => $doctor->photo_path ? URL::route('image', ['path' => $doctor->photo_path, 'w' => 40, 'h' => 40, 'fit' => 'crop']) : null,
-                    
-                    // 'organization' => $doctor->organization ? $doctor->organization->only('name') : null,
-                ]),
+            'filters' => Request::all('search', 'trashed'),
+            'doctors' => Auth::user()->account->users()
+            ->orderByName()
+            ->filter(Request::only('search', 'role', 'trashed'))
+            ->paginate(10)
+            ->withQueryString()
+            ->transform(fn ($user) => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'owner' => $user->owner,
+                'role'  => ($user->roles->pluck('name')[0] == 'standard') ? 'Receptionist' : ucfirst($user->roles->pluck('name')[0]),
+                'photo' => $user->photo_path ? URL::route('image', ['path' => $user->photo_path, 'w' => 40, 'h' => 40, 'fit' => 'crop']) : null,
+                'deleted_at' => $user->deleted_at,
+            ]),
         ]);
 
     }

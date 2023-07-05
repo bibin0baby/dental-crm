@@ -21,7 +21,7 @@
           <th class="pb-4 pt-6 px-6">City</th>
           <th class="pb-4 pt-6 px-6" colspan="2">Phone</th>
         </tr>
-        <tr v-for="doctor in doctor.data" :key="doctor.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+        <tr v-for="doctor in doctors" :key="doctor.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
             <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/doctors/${doctor.id}/edit`">
               {{ doctor.name }}
@@ -58,12 +58,12 @@
             </Link>
           </td>
         </tr>
-        <tr v-if="doctor.data.length === 0">
+        <tr v-if="doctors.length === 0">
           <td class="px-6 py-4 border-t" colspan="4">No doctor found.</td>
         </tr>
       </table>
     </div>
-    <pagination class="mt-6" :links="doctor.links" />
+    <!-- <pagination class="mt-6" :links="doctors.links" /> -->
   </div>
 </template>
 
@@ -88,7 +88,7 @@ export default {
   layout: Layout,
   props: {
     filters: Object,
-    doctor: Object,
+    doctors: Object,
   },
   data() {
     return {
