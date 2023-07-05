@@ -27,34 +27,7 @@
           <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">From :</label>
           <input type="time" v-model="form.availabilityFrom" :error="form.errors.availabilityFrom" class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">
           <p v-if="form.errors.availabilityFrom" class="text-red-500">{{ form.errors.availabilityFrom }}</p>
-          <!-- <select-input v-model="form.AvailabilityFrom" :error="form.errors.AvailabilityFrom"  class="pb-8 pr-6  lg:w-1/05"   >
-            <option value="09:00 AM">09:00 AM</option>
-            <option value="09:30 AM">09:30 AM</option>
-            <option value="10:00 AM">10:00 AM</option>
-            <option value="10:30 AM">10:30 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <option value="11:30 AM">11:30 AM</option>
-            <option value="12:00 AM">12:00 AM</option>
-            <option value="12:30 AM">12:30 AM</option>
-            <option value="01:00 PM">01:00 PM</option>
-            <option value="01:30 PM">01:30 PM</option>
-            <option value="02:00 AM">02:00 PM</option> 
-            <option value="02:30 AM">02:30 PM</option>
-            <option value="03:00 AM">03:00 PM</option>
-            <option value="03:30 AM">03:30 PM</option>
-            <option value="04:00 AM">04:00 PM</option>
-            <option value="04:30 AM">04:00 PM</option>
-            <option value="05:00 AM">05:00 PM</option>
-            <option value="05:30 AM">05:30 PM</option>
-            <option value="06:00 AM">06:00 PM</option>
-            <option value="06:30 AM">06:30 PM</option>
-            <option value="07:00 AM">07:00 PM</option> 
-            <option value="07:30 AM">07:30 PM</option> 
-            <option value="08:00 AM">08:00 PM</option>
-            <option value="08:30 AM">08:30 PM</option>
-            <option value="09:00 AM">09:00 PM</option>
-          </select-input> -->
-		  
+
           <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">To :</label>
           <input type="time" v-model="form.availabilityTo" class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">
           <p v-if="form.errors.availabilityTo" class="text-red-500">{{ form.errors.availabilityTo }}</p>
