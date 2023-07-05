@@ -1,13 +1,13 @@
 <template>
   <div>
     <Head :title="`${form.first_name} ${form.last_name}`" />
-    <h1 class="mb-8 text-3xl font-bold">
+    <h1 class="mb-8 text-5xl font-bold">
       <Link class="text-indigo-400 hover:text-indigo-600" href="/availabilitys">Doctor Schedule</Link>
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.first_name }} {{ form.last_name }}
     </h1>
     <trashed-message v-if="availability.deleted_at" class="mb-6" @restore="restore"> This schedule has been deleted. </trashed-message>
-    <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
+    <div class="max-w-5xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="update">
       <div>
        

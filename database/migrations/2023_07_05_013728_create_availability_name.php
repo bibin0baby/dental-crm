@@ -18,13 +18,13 @@ class CreateAvailabilityName extends Migration
             $table->integer('account_id')->index();
             $table->integer('organization_id')->nullable()->index();
             $table->integer('doctor_id')->nullable(); 
-            $table->time('break_Fromtime')->nullable(); 
-            $table->time('break_Totime')->nullable(); 
+            $table->dateTime('break_Fromtime')->nullable(); 
+            $table->dateTime('break_Totime')->nullable(); 
             $table->date('leave_FromDate')->nullable(); 
             $table->date('leave_ToDate')->nullable(); 
             $table->string('availabilityDays', 25);
-            $table->time('availabilityFrom')->nullable(); 
-            $table->time('availabilityTo')->nullable(); 
+            $table->dateTime('availabilityFrom')->nullable(); 
+            $table->dateTime('availabilityTo')->nullable(); 
             $table->string('ConsultaionTime', 25)->nullable(); 
             // $table->integer('doctor_id')->index()->nullable(); 
             // $table->string('break_Day', 25);

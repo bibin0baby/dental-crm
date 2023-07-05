@@ -146,20 +146,6 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
     ->where('path', '.*')
     ->name('image');
 
-// Doctors
-
-Route::get('doctors', [DoctorsController::class, 'index'])
-    ->name('doctors')
-    ->middleware('auth');
-
-Route::post('doctors', [DoctorsController::class, 'store'])
-    ->name('doctors.store')
-    ->middleware('auth');
-  
-
-Route::get('doctoravailability', [DoctorsController::class, 'doctoravailability'])
-    ->name('doctors.doctoravailability')
-    ->middleware('auth');
 
 // Receptionist
 
