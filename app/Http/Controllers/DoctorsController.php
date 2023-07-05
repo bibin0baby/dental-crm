@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Illuminate\Validation\Rule;
 use App\Models\User;
+App\Models\doctor_availability;
 
 class DoctorsController extends Controller
 {
@@ -64,5 +65,36 @@ class DoctorsController extends Controller
         return Inertia::render('Doctor/DoctorAvailability', [
             'doctor' => $doc_availability
         ]);
+    }
+
+    public function store()
+    {
+        // print_r("here");
+        Request::validate([
+            'availabilityDays' => ['required','max:100'],
+            'availabilityFrom' => ['required', 'date'],
+            'availabilityTo' => ['required','date'],
+            'break_Fromtime' => ['required', 'date'],
+            'break_Totime' => ['required','date'],
+            'leave_FromDate' => ['required', 'date'],
+            'leave_ToDate' => ['required', 'date'],
+            'ConsultaionTime' => ['required', 'max:100'],
+        ]);
+        // Auth::user()->account->organizations()->create(
+        //     Request::validate([
+        // return Redirect::route('doctor_availability')->with('success', 'Organization created.');
+       Auth::user()->account->doctor_availability()->create([
+            'doctor_id' => Request::get('doctor_id'),
+            'availabilityDays' => Request::get('availabilityDays'),
+            'availabilityFrom' => Request::get('availabilityFrom'),
+            'availabilityTo' => Request::get('availabilityTo'),
+            'break_Fromtime' => Request::get('break_Fromtime'),
+            'break_Totime' => Request::get('break_Totime'),
+            'leave_FromDate' => Request::get('leave_FromDate'),
+            'leave_ToDate' => Request::get('leave_ToDate'),
+            'consultation' => Request::get('ConsultaionTime'),
+        ]);   
+        //echo "<pre>";print_r($ScheduleDoctorAvailability);echo "</pre>";    
+         return Redirect::route('doctor_availability')->with('success', 'Doctor schedule created.');
     }
 }

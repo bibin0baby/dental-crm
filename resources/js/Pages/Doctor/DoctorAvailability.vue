@@ -1,17 +1,18 @@
 <template>
-  <div>
+  <div>    
     <Head title="Schedule Management" />
     <h1 class="mb-8 text-3xl font-bold">
-      <Link class="text-indigo-400 hover:text-indigo-600" href="/doctor">Doctor</Link>
+      <Link class="text-indigo-400 hover:text-indigo-600" href="/doctoravailability">Doctor</Link>
       <span class="text-indigo-400 font-medium">/</span> Schedule Management
     </h1>
-    <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
+    <div class="max-w-5xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="store">
+      
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
-          <label  class="pb-8 pr-6  lg:w-1/05"  >Availability</label>
-          <label  class="pb-8 pr-6  lg:w-1/05" >Days</label>
-          <select-input v-model="form.AvailabilityDays" :error="form.errors.AvailabilityDays"   class="pb-8 pr-6  lg:w-1/05"   >
-            
+          <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">Availability</label>
+          <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;    margin-left: -37px;">Days</label>
+          <select-input v-model="form.availabilityDays" :error="form.errors.availabilityDays" class="pb-14 pr-14  lg:w-1/05">
+
             <option value="Sunday">Sunday</option>
             <option value="Monday">Monday</option>
             <option value="Tuesday">Tuesday</option>
@@ -20,201 +21,54 @@
             <option value="Friday">Friday</option>
             <option value="Saturday">Saturday</option>
           </select-input>
-          <label  class="pb-8 pr-6  lg:w-1/05" >From</label>
-          <select-input v-model="form.AvailabilityFrom" :error="form.errors.AvailabilityFrom"  class="pb-8 pr-6  lg:w-1/05"   >
-            <option value="09:00 AM">09:00 AM</option>
-            <option value="09:30 AM">09:30 AM</option>
-            <option value="10:00 AM">10:00 AM</option>
-            <option value="10:30 AM">10:30 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <option value="11:30 AM">11:30 AM</option>
-            <option value="12:00 AM">12:00 AM</option>
-            <option value="12:30 AM">12:30 AM</option>
-            <option value="01:00 PM">01:00 PM</option>
-            <option value="01:30 PM">01:30 PM</option>
-            <option value="02:00 AM">02:00 PM</option> 
-            <option value="02:30 AM">02:30 PM</option>
-            <option value="03:00 AM">03:00 PM</option>
-            <option value="03:30 AM">03:30 PM</option>
-            <option value="04:00 AM">04:00 PM</option>
-            <option value="04:30 AM">04:00 PM</option>
-            <option value="05:00 AM">05:00 PM</option>
-            <option value="05:30 AM">05:30 PM</option>
-            <option value="06:00 AM">06:00 PM</option>
-            <option value="06:30 AM">06:30 PM</option>
-            <option value="07:00 AM">07:00 PM</option> 
-            <option value="07:30 AM">07:30 PM</option> 
-            <option value="08:00 AM">08:00 PM</option>
-            <option value="08:30 AM">08:30 PM</option>
-            <option value="09:00 AM">09:00 PM</option>
-          </select-input>
-          <label  class="pb-8 pr-6  lg:w-1/05" >To</label>
-          <select-input v-model="form.AvailabilityTo" :error="form.errors.AvailabilityTo"   class="pb-8 pr-6  lg:w-1/05"  >
-           
-            <option value="09:00 AM">09:00 AM</option>
-            <option value="09:30 AM">09:30 AM</option>
-            <option value="10:00 AM">10:00 AM</option>
-            <option value="10:30 AM">10:30 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <option value="11:30 AM">11:30 AM</option>
-            <option value="12:00 AM">12:00 AM</option>
-            <option value="12:30 AM">12:30 AM</option>
-            <option value="01:00 PM">01:00 PM</option>
-            <option value="01:30 PM">01:30 PM</option>
-            <option value="02:00 AM">02:00 PM</option> 
-            <option value="02:30 AM">02:30 PM</option>
-            <option value="03:00 AM">03:00 PM</option>
-            <option value="03:30 AM">03:30 PM</option>
-            <option value="04:00 AM">04:00 PM</option>
-            <option value="04:30 AM">04:00 PM</option>
-            <option value="05:00 AM">05:00 PM</option>
-            <option value="05:30 AM">05:30 PM</option>
-            <option value="06:00 AM">06:00 PM</option>
-            <option value="06:30 AM">06:30 PM</option>
-            <option value="07:00 AM">07:00 PM</option> 
-            <option value="07:30 AM">07:30 PM</option> 
-            <option value="08:00 AM">08:00 PM</option>
-            <option value="08:30 AM">08:30 PM</option>
-            <option value="09:00 AM">09:00 PM</option>
-          </select-input>
-          <label  class="pb-8 pr-6  lg:w-1/05" > Break Time</label>
-          <label  class="pb-8 pr-6  lg:w-1/05" > From</label>
-          <select-input v-model="form.BreakFrom" :error="form.errors.BreakFrom"  style="    margin-right: 22px; margin-left: -6px;" class="pb-8 pr-6  lg:w-1/05"  >
-           
-            <option value="09:00 AM">09:00 AM</option>
-            <option value="09:30 AM">09:30 AM</option>
-            <option value="10:00 AM">10:00 AM</option>
-            <option value="10:30 AM">10:30 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <option value="11:30 AM">11:30 AM</option>
-            <option value="12:00 AM">12:00 AM</option>
-            <option value="12:30 AM">12:30 AM</option>
-            <option value="01:00 PM">01:00 PM</option>
-            <option value="01:30 PM">01:30 PM</option>
-            <option value="02:00 AM">02:00 PM</option> 
-            <option value="02:30 AM">02:30 PM</option>
-            <option value="03:00 AM">03:00 PM</option>
-            <option value="03:30 AM">03:30 PM</option>
-            <option value="04:00 AM">04:00 PM</option>
-            <option value="04:30 AM">04:00 PM</option>
-            <option value="05:00 AM">05:00 PM</option>
-            <option value="05:30 AM">05:30 PM</option>
-            <option value="06:00 AM">06:00 PM</option>
-            <option value="06:30 AM">06:30 PM</option>
-            <option value="07:00 AM">07:00 PM</option> 
-            <option value="07:30 AM">07:30 PM</option> 
-            <option value="08:00 AM">08:00 PM</option>
-            <option value="08:30 AM">08:30 PM</option>
-            <option value="09:00 AM">09:00 PM</option>
-          </select-input>
-          <label  class="pb-8 pr-6  lg:w-1/05"  > To</label>
-          <select-input v-model="form.BreakTo" :error="form.errors.BreakFrom" style="   margin-left: 13px;    width: 78%; margin-right: 20px;" class="pb-8 pr-6  lg:w-1/05" >
-            
-            <option value="09:00 AM">09:00 AM</option>
-            <option value="09:30 AM">09:30 AM</option>
-            <option value="10:00 AM">10:00 AM</option>
-            <option value="10:30 AM">10:30 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <option value="11:30 AM">11:30 AM</option>
-            <option value="12:00 AM">12:00 AM</option>
-            <option value="12:30 AM">12:30 AM</option>
-            <option value="01:00 PM">01:00 PM</option>
-            <option value="01:30 PM">01:30 PM</option>
-            <option value="02:00 AM">02:00 PM</option> 
-            <option value="02:30 AM">02:30 PM</option>
-            <option value="03:00 AM">03:00 PM</option>
-            <option value="03:30 AM">03:30 PM</option>
-            <option value="04:00 AM">04:00 PM</option>
-            <option value="04:30 AM">04:00 PM</option>
-            <option value="05:00 AM">05:00 PM</option>
-            <option value="05:30 AM">05:30 PM</option>
-            <option value="06:00 AM">06:00 PM</option>
-            <option value="06:30 AM">06:30 PM</option>
-            <option value="07:00 AM">07:00 PM</option> 
-            <option value="07:30 AM">07:30 PM</option> 
-            <option value="08:00 AM">08:00 PM</option>
-            <option value="08:30 AM">08:30 PM</option>
-            <option value="09:00 AM">09:00 PM</option>
-          </select-input>
-          
-          <label  class="pb-8 pr-6  lg:w-1/05" style="width: 34%;" > Leave</label>
-          <label  class="pb-8 pr-6  lg:w-1/05" style="margin-left: -150px;margin-right: 0px;"> From</label>
-          <select-input v-model="form.Leave" :error="form.errors.Leave"  style=" margin-right: 18PX;width: 97%;"  class="pb-8 pr-6  lg:w-1/05"  >
-            
-            <option value="09:00 AM">09:00 AM</option>
-            <option value="09:30 AM">09:30 AM</option>
-            <option value="10:00 AM">10:00 AM</option>
-            <option value="10:30 AM">10:30 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <option value="11:30 AM">11:30 AM</option>
-            <option value="12:00 AM">12:00 AM</option>
-            <option value="12:30 AM">12:30 AM</option>
-            <option value="01:00 PM">01:00 PM</option>
-            <option value="01:30 PM">01:30 PM</option>
-            <option value="02:00 AM">02:00 PM</option> 
-            <option value="02:30 AM">02:30 PM</option>
-            <option value="03:00 AM">03:00 PM</option>
-            <option value="03:30 AM">03:30 PM</option>
-            <option value="04:00 AM">04:00 PM</option>
-            <option value="04:30 AM">04:00 PM</option>
-            <option value="05:00 AM">05:00 PM</option>
-            <option value="05:30 AM">05:30 PM</option>
-            <option value="06:00 AM">06:00 PM</option>
-            <option value="06:30 AM">06:30 PM</option>
-            <option value="07:00 AM">07:00 PM</option> 
-            <option value="07:30 AM">07:30 PM</option> 
-            <option value="08:00 AM">08:00 PM</option>
-            <option value="08:30 AM">08:30 PM</option>
-            <option value="09:00 AM">09:00 PM</option>
-          </select-input>
-          <label  class="pb-8 pr-6  lg:w-1/05" style="    margin-right: 18PX;" > To</label>
-          <select-input v-model="form.Leave" :error="form.errors.Leave"  class="pb-8 pr-6  lg:w-1/05"  >
-            
-            <option value="09:00 AM">09:00 AM</option>
-            <option value="09:30 AM">09:30 AM</option>
-            <option value="10:00 AM">10:00 AM</option>
-            <option value="10:30 AM">10:30 AM</option>
-            <option value="11:00 AM">11:00 AM</option>
-            <option value="11:30 AM">11:30 AM</option>
-            <option value="12:00 AM">12:00 AM</option>
-            <option value="12:30 AM">12:30 AM</option>
-            <option value="01:00 PM">01:00 PM</option>
-            <option value="01:30 PM">01:30 PM</option>
-            <option value="02:00 AM">02:00 PM</option> 
-            <option value="02:30 AM">02:30 PM</option>
-            <option value="03:00 AM">03:00 PM</option>
-            <option value="03:30 AM">03:30 PM</option>
-            <option value="04:00 AM">04:00 PM</option>
-            <option value="04:30 AM">04:00 PM</option>
-            <option value="05:00 AM">05:00 PM</option>
-            <option value="05:30 AM">05:30 PM</option>
-            <option value="06:00 AM">06:00 PM</option>
-            <option value="06:30 AM">06:30 PM</option>
-            <option value="07:00 AM">07:00 PM</option> 
-            <option value="07:30 AM">07:30 PM</option> 
-            <option value="08:00 AM">08:00 PM</option>
-            <option value="08:30 AM">08:30 PM</option>
-            <option value="09:00 AM">09:00 PM</option>
-          </select-input>
-          <label  class="pb-8 pr-6  lg:w-1/05" style="width: 34%;" >Consultaion Time</label>
-          <select-input v-model="form.Leave" :error="form.errors.Leave"  class="pb-8 pr-6  lg:w-1/05" style="margin-left: -88px;
-    margin-right: 100px;"  >
-            
-            <option value="10:00 Min">10:00 Min</option>
-            <option value="15:00 Min">15:00 Min</option>
-            <option value="30:00 Min">30:00 Min</option>
-            <option value="45:00 Min">30:00 Min</option>
-          </select-input>
-          <datetime format="MM/DD/YYYY" width="300px" v-model="val"></datetime>
-        <app-layout>
-    <template #header>
-      <h1>Calendar</h1>
-    </template>
+          <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">From :</label>
+          <input type="time" v-model="form.availabilityFrom" :error="form.errors.availabilityFrom"
+            class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">
 
-    <calendar></calendar>
-  </app-layout>
+          <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">To :</label>
+          <input type="time" v-model="form.availabilityTo" :error="form.errors.availabilityTo"
+            class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">
+
+          <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;"> Break Time</label>
+          <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;    margin-left: -39px;"> From :</label>
+          <input type="time" v-model="form.break_Fromtime" :error="form.errors.break_Totime"
+            style="    margin-right: 22px; margin-left: -6px;" class="pb-14 pr-14  lg:w-1/05">
+
+          <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;"> To :</label>
+          <input type="time" v-model="form.break_Totime" :error="form.errors.break_Totime"
+            style="   margin-left: 13px; margin-right: 20px;" class="pb-14 pr-14  lg:w-1/05">
+
+          <label class="pb-14 pr-14  lg:w-1/05" style="width: 36%; font-weight: 500;"> Leave</label>
+          <label class="pb-14 pr-14  lg:w-1/05" style="margin-left: -256px;margin-right: 0px; font-weight: 500;"> From
+            :</label>
+          <input type="date" v-model="form.leave_FromDate" :error="form.errors.leave_FromDate"
+            class="pb-14 pr-14  lg:w-1/05" style=" margin-right: 18px; margin-left: -11px;">
+
+          <label class="pb-14 pr-14  lg:w-1/05" style=" margin-left: -23px;margin-right: 0px; font-weight: 500;"> To
+            :</label>
+          <input type="date" v-model="form.leave_ToDate" :error="form.errors.leave_ToDate" class="pb-14 pr-14  lg:w-1/05"
+            style="">
+
+          <label class="pb-14 pr-14  lg:w-1/05" style="width: 36%; font-weight: 500;">Consultaion Time :</label>
+          <select-input v-model="form.ConsultaionTime" :error="form.errors.ConsultaionTime"
+            class="pb-14 pr-14  lg:w-1/05">
+
+            <option value="05:00">05:00 Min</option>
+            <option value="10:00">10:00 Min</option>
+            <option value="15:00">15:00 Min</option>
+          </select-input>
+          <!-- <input type="time" min="0" max="59" step="1" v-model="minutes"> -->
+          <!-- <input type="number" v-model="form.ConsultaionTime" :error="form.errors.ConsultaionTime"
+            class="pb-14 pr-14  lg:w-1/05" style="margin-left: -157px;margin-right: 100px;"> -->
+          <input type="hidden" v-model="form.doctor_id">
+          <app-layout>
+            <template #header>
+              <h1>Calendar</h1>
+            </template>
+
+            <calendar></calendar>
+          </app-layout>
         </div>
-
         <div class="flex items-center justify-end px-8 py-4 bg-gray-50 border-t border-gray-100">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Save</loading-button>
         </div>
@@ -238,7 +92,7 @@ export default {
     LoadingButton,
     SelectInput,
     TextInput,
-    datetime 
+    datetime
   },
   layout: Layout,
   props: {
@@ -249,21 +103,20 @@ export default {
     return {
       form: this.$inertia.form({
         doctor_id: '',
-        break_Day: '',
-        break_Fromtime: '',
-        break_Totime: '',
-        leave_FromDate:'',
-        leave_ToDate: '',
-        leave_ToDate: '',
-        availability: '',
-        consultation: '',   
-        times: ['9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM'],
+        availabilityDays: '',
+        AvailabilityFrom: '',
+        AvailabilityTo: '',
+        BreakFrom: '',
+        BreakTo: '',
+        LeaveFrom: '',
+        LeaveTo: '',
+        ConsultaionTime: '',
       }),
     }
   },
   methods: {
     store() {
-      this.form.post('/doctor')
+      this.form.post('/doctors')
     },
   },
 }

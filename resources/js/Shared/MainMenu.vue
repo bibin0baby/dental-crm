@@ -32,7 +32,12 @@
         <div :class="isUrl('appointments') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Appointments</div>
       </Link>
     </div>
-   
+    <div class="mb-4">
+      <Link class="group flex items-center py-3" href="/availabilitys">
+        <icon name="appointments" class="mr-2 w-4 h-4" :class="isUrl('availabilitys') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />
+        <div :class="isUrl('availabilitys') ? 'text-white' : 'text-indigo-300 group-hover:text-white'">Doctor Availability</div>
+      </Link>
+    </div>
     <div class="mb-4">
       <Link class="group flex items-center py-3" href="/reports">
         <icon name="printer" class="mr-2 w-4 h-4" :class="isUrl('reports') ? 'fill-white' : 'fill-indigo-400 group-hover:fill-white'" />

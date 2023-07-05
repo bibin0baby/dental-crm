@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\AvailabilitysController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
@@ -150,7 +151,11 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
 Route::get('doctors', [DoctorsController::class, 'index'])
     ->name('doctors')
     ->middleware('auth');
-    
+
+Route::post('doctors', [DoctorsController::class, 'store'])
+    ->name('doctors.store')
+    ->middleware('auth');
+  
 
 Route::get('doctoravailability', [DoctorsController::class, 'doctoravailability'])
     ->name('doctors.doctoravailability')
@@ -187,4 +192,34 @@ Route::post('appointments', [AppointmentsController::class, 'store'])
     
 Route::get('appointments/{appointment}/edit', [AppointmentsController::class, 'edit'])
     ->name('appointments.edit')
+    ->middleware('auth');
+
+    //Availability
+    
+ Route::get('availabilitys', [AvailabilitysController::class, 'index'])
+    ->name('availabilitys')
+    ->middleware('auth');
+
+Route::get('availabilitys/create', [AvailabilitysController::class, 'create'])
+    ->name('availabilitys.create')
+    ->middleware('auth');
+
+Route::post('availabilitys', [AvailabilitysController::class, 'store'])
+    ->name('availabilitys.store')
+    ->middleware('auth');
+
+Route::get('availabilitys/{availabilitys}/edit', [AvailabilitysController::class, 'edit'])
+    ->name('availabilitys.edit')
+    ->middleware('auth');
+
+Route::put('availabilitys/{availabilitys}', [AvailabilitysController::class, 'update'])
+    ->name('availabilitys.update')
+    ->middleware('auth');
+
+Route::delete('availabilitys/{availabilitys}', [AvailabilitysController::class, 'destroy'])
+    ->name('availabilitys.destroy')
+    ->middleware('auth');
+
+Route::put('availabilitys/{availabilitys}/restore', [AvailabilitysController::class, 'restore'])
+    ->name('availabilitys.restore')
     ->middleware('auth');
