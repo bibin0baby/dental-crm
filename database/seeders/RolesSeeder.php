@@ -18,7 +18,7 @@ class RolesSeeder extends Seeder
         $role_admin = Role::create(['name' => 'admin']); // IT guys
         $role_standard = Role::create(['name' => 'standard']); // Receptionist
         $role_doctor = Role::create(['name' => 'doctor']); // Doctor
-        $role_patient = Role::create(['name' => 'client']); // patients
+        //$role_patient = Role::create(['name' => 'client']); // patients
 
         $permission_read = Permission::create(['name' => 'read']);
         $permission_edit = Permission::create(['name' => 'edit']);
@@ -30,6 +30,6 @@ class RolesSeeder extends Seeder
         $role_admin->syncPermissions($permissions_admin);
         $role_standard->givePermissionTo([$permission_read, $permission_edit]);
         $role_doctor->givePermissionTo([$permission_read, $permission_edit, $permission_write]);
-        $role_patient->givePermissionTo($permission_read);
+        //$role_patient->givePermissionTo($permission_read);
     }
 }
