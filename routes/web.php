@@ -173,6 +173,10 @@ Route::get('client/{doc_id}', [ClientsController::class, 'index'])
     ->name('client')
     ->middleware('guest');
 
+Route::post('client', [ClientsController::class, 'store'])
+    ->name('client.store')
+    ->middleware('guest');
+
 Route::get('calendar_appointments', [ClientsController::class, 'calendar_appointments'])
         ->name('calendar-appointments')
         ->middleware('guest');

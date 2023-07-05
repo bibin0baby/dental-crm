@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Head title="Create Contact" />
+    <Head title="Create Patients" />
     <h1 class="mb-8 text-3xl font-bold">
-      <Link class="text-indigo-400 hover:text-indigo-600" href="/contacts">Contacts</Link>
+      <Link class="text-indigo-400 hover:text-indigo-600" href="/contacts">Patients</Link>
       <span class="text-indigo-400 font-medium">/</span> Create
     </h1>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
@@ -27,7 +27,7 @@
           <text-input v-model="form.postal_code" :error="form.errors.postal_code" class="pb-8 pr-6 w-full lg:w-1/2" label="Postal code" />
         </div>
         <div class="flex items-center justify-end px-8 py-4 bg-gray-50 border-t border-gray-100">
-          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Contact</loading-button>
+          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Patient</loading-button>
         </div>
       </form>
     </div>
