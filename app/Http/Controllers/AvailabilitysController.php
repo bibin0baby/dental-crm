@@ -75,16 +75,12 @@ class AvailabilitysController extends Controller
         
         Auth::user()->account->availabilitys()->create([
             Request::validate([
-                'doctor_id' => ['nullable','integer'], 
-                'availabilityFrom' => ['nullable', 'date_format:H:i'],
-                    'availabilityTo' => ['nullable', 'date_format:H:i'],
-                    'break_Fromtime' => ['nullable', 'date_format:H:i'],
-                    'break_Totime' => ['nullable', 'date_format:H:i'],               
-                // 'availabilityDays' => ['nullable','max:100'],
-                // 'availabilityFrom' => ['nullable', 'time'],
-                // 'availabilityTo' => ['nullable','time'],
-                // 'break_Fromtime' => ['nullable', 'time'],
-                // 'break_Totime' => ['nullable','time'],
+                'doctor_id' => ['nullable','integer'],
+                'availabilityDays' => ['nullable','max:100'],
+                'availabilityFrom' => ['nullable', 'time'],
+                'availabilityTo' => ['nullable','time'],
+                'break_Fromtime' => ['nullable', 'time'],
+                'break_Totime' => ['nullable','time'],
                 'leave_FromDate' => ['nullable', 'date'],
                 'leave_ToDate' => ['nullable', 'date'],
                 'ConsultaionTime' => ['nullable', 'max:100'],
