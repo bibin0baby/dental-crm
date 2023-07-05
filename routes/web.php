@@ -148,18 +148,22 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
 
 // Doctors
 
-Route::get('doctors', [DoctorsController::class, 'index'])
-    ->name('doctors')
-    ->middleware('auth');
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('doctors', [DoctorsController::class, 'index'])
+        ->name('doctors')
+        ->middleware('auth');
 
-Route::post('doctors', [DoctorsController::class, 'store'])
-    ->name('doctors.store')
-    ->middleware('auth');
-  
+    Route::post('doctors', [DoctorsController::class, 'store'])
+        ->name('doctors.store')
+        ->middleware('auth');
+    
+});
 
-Route::get('doctoravailability', [DoctorsController::class, 'doctoravailability'])
+Route::group(['middleware' => ['role:admin|doctor']], function () {
+    Route::get('doctoravailability', [DoctorsController::class, 'doctoravailability'])
     ->name('doctors.doctoravailability')
     ->middleware('auth');
+});
 
 // Receptionist
 

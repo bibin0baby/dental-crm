@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Illuminate\Validation\Rule;
 use App\Models\User;
-App\Models\doctor_availability;
+use App\Models\doctor_availability;
 
 class DoctorsController extends Controller
 {
@@ -22,7 +22,7 @@ class DoctorsController extends Controller
         // ]);
         return Inertia::render('Doctor/Index', [
             'filters' => Request::all('search', 'trashed'),
-            'doctors' => Auth::user()->account->users()
+            'doctors' => Auth::user()->account->users('doctor')
             ->orderByName()
             ->filter(Request::only('search', 'role', 'trashed'))
             ->paginate(10)
