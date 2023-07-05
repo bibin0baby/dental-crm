@@ -74,20 +74,20 @@ class AvailabilitysController extends Controller
         // ]);
         
         Auth::user()->account->availabilitys()->create([
-            Request::validate([
+           // Request::validate([
                 'doctor_id' => ['nullable','integer'],
                 'availabilityDays' => ['nullable','max:100'],
-                'availabilityFrom' => ['nullable', 'dateTime'],
-                'availabilityTo' => ['nullable','dateTime'],
-                'break_Fromtime' => ['nullable', 'dateTime'],
-                'break_Totime' => ['nullable','dateTime'],
-                'leave_FromDate' => ['nullable', 'date'],
-                'leave_ToDate' => ['nullable', 'date'],
+                'availabilityFrom' => ['nullable', 'max:100'],
+                'availabilityTo' => ['nullable','max:100'],
+                'break_Fromtime' => ['nullable', 'max:100'],
+                'break_Totime' => ['nullable','max:100'],
+                'leave_FromDate' => ['nullable', 'max:100'],
+                'leave_ToDate' => ['nullable', 'max:100'],
                 'ConsultaionTime' => ['nullable', 'max:100'],
                 'organization_id' => ['nullable', Rule::exists('organizations', 'id')->where(function ($query) {
                     $query->where('account_id', Auth::user()->account_id);
                 })],
-            ])
+           // ])
         ]);
 
         return Redirect::route('availabilitys')->with('success', 'Doctor schedule created.');       
@@ -122,12 +122,12 @@ class AvailabilitysController extends Controller
         $availability->update(
             Request::validate([
                 'availabilityDays' => ['nullable', 'max:100'],
-                'availabilityFrom' => ['nullable', 'date_format:H:i'],
-                'availabilityTo' => ['nullable', 'date_format:H:i'],
-                'break_Fromtime' => ['nullable', 'date_format:H:i'],
-                'break_Totime' => ['nullable', 'date_format:H:i'],
-                'leave_FromDate' => ['nullable', 'date'],
-                'leave_ToDate' => ['nullable', 'date'],
+                'availabilityFrom' => ['nullable', 'max:100'],
+                'availabilityTo' => ['nullable', 'max:100'],
+                'break_Fromtime' => ['nullable', 'max:100'],
+                'break_Totime' => ['nullable', 'max:100'],
+                'leave_FromDate' => ['nullable', 'max:100'],
+                'leave_ToDate' => ['nullable', 'max:100'],
                 'ConsultaionTime' => ['nullable', 'max:100'],
                 'organization_id' => [
                     'nullable',
