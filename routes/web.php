@@ -188,3 +188,11 @@ Route::post('appointments', [AppointmentsController::class, 'store'])
 Route::get('appointments/{appointment}/edit', [AppointmentsController::class, 'edit'])
     ->name('appointments.edit')
     ->middleware('auth');
+
+Route::put('appointments/{appointment}', [AppointmentsController::class, 'update'])
+    ->name('appointments.update')
+    ->middleware('auth');
+
+Route::delete('appointments/{appointment}', [AppointmentsController::class, 'destroy'])
+    ->name('appointments.destroy')
+    ->middleware('auth');

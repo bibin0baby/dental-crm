@@ -46,12 +46,12 @@ class Appointment extends Model
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%'.$search.'%')
-                    ->orWhere('description', 'like', '%'.$search.'%')
-                    ->orWhere('photo_path', 'like', '%'.$search.'%')
                     ->orWhere('doctor_id', 'like', '%'.$search.'%')
+                
+                    
                    
                     ->orWhereHas('contact', function ($query) use ($search) {
-                        $query->where('name', 'like', '%'.$search.'%');
+                        $query->where('first_name', 'like', '%'.$search.'%');
                     });
             });
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
