@@ -19,7 +19,7 @@
               </template>
             </dropdown>
           </div>
-          <div class="md:text-md flex items-center justify-between p-4 w-full text-sm bg-white border-b md:px-12 md:py-0">
+          <div class="md:text-md flex items-center justify-between p-4 w-full text-sm bg-white border-b md:px-12 md:py-0" style="background-color: #ffe4c400;">
             <div class="mr-4 mt-1">{{ auth.user.account.name }}</div>
             <dropdown class="mt-1" placement="bottom-end">
               <template #default>
@@ -43,7 +43,7 @@
         </div>
         <div class="md:flex md:flex-grow md:overflow-hidden">
           <main-menu class="hidden flex-shrink-0 p-12 w-56 bg-indigo-800 overflow-y-auto md:block" />
-          <div class="px-4 py-8 md:flex-1 md:p-12 md:overflow-y-auto" scroll-region>
+          <div class="px-4 py-8 md:flex-1 md:p-12 md:overflow-y-auto  background-image" scroll-region>
             <flash-messages />
             <slot />
           </div>

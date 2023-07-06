@@ -1,7 +1,7 @@
 <template>
   <div>
     <Head :title="`${form.first_name} ${form.last_name}`" />
-    <h1 class="mb-8 text-5xl font-bold">
+    <h1 class="mb-8 text-3xl font-bold">
       <Link class="text-indigo-400 hover:text-indigo-600" href="/availabilitys">Doctor Schedule</Link>
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.first_name }} {{ form.last_name }}
@@ -53,7 +53,8 @@
         <input type="date" v-model="form.leave_ToDate" :error="form.errors.leave_ToDate" class="pb-14 pr-14  lg:w-1/05"
           style="">
 
-        <label class="pb-14 pr-14  lg:w-1/05" style="width: 36%; font-weight: 500;">Consultaion Time :</label>
+        <label class="pb-14 pr-14  lg:w-1/05" style="width: 36%; font-weight: 500;">Consultaion </label>
+        <label class="pb-14 pr-14  lg:w-1/05" style="margin-left: -256px;margin-right: 0px; font-weight: 500;"> Time :</label>
         <select-input v-model="form.ConsultaionTime" :error="form.errors.ConsultaionTime"
           class="pb-14 pr-14  lg:w-1/05">
 
