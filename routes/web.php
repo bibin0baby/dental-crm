@@ -147,24 +147,25 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
     ->name('image');
 
 // Doctors
-
+//----- doctors availability schedule --//
 Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('doctors', [AvailabilitysController::class, 'index'])
-        ->name('doctors')
+    Route::get('availabilitys', [AvailabilitysController::class, 'index'])
+        ->name('availabilitys')
         ->middleware('auth');
 
-Route::post('doctors', [AvailabilitysController::class, 'store'])
-        ->name('doctors.store')
+Route::post('availabilitys', [AvailabilitysController::class, 'store'])
+        ->name('availabilitys.store')
         ->middleware('auth');
     
 });
 
 Route::group(['middleware' => ['role:admin|doctor']], function () {
     Route::get('availabilitys', [AvailabilitysController::class, 'doctoravailability'])
-    ->name('doctors.doctoravailability')
+    ->name('availabilitys.doctoravailability')
     ->middleware('auth');
 });
 
+//------ doctor -----
 Route::group(['middleware' => ['role:admin|doctor']], function () {
     Route::get('doctors', [DoctorsController::class, 'index'])
         ->name('doctors')
