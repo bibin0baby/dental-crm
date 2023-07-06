@@ -31,6 +31,7 @@ class AvailabilitysController extends Controller
                     'leave_FromDate' => $availabilitys->leave_FromDate,
                     'leave_ToDate' => $availabilitys->leave_ToDate,
                     'ConsultaionTime' => $availabilitys->ConsultaionTime,
+                    'doctor_id' => $availabilitys->doctor_id,
                     'city' => $availabilitys->city,
                     'deleted_at' => $availabilitys->deleted_at,
                     'organization' => $availabilitys->organization ? $availabilitys->organization->only('name') : null,
@@ -52,69 +53,30 @@ class AvailabilitysController extends Controller
 
     
     public function store(Request $request)
-    {     
-
-        // Request::validate([
-        //     'doctor_id' => ['nullable','integer'],
-        //     'availabilityDays' => ['nullable','max:100'],
-        //     'availabilityFrom' => ['nullable', 'date_format:H:i'],
-        //     'availabilityTo' => ['nullable', 'date_format:H:i'],
-        //     'break_Fromtime' => ['nullable', 'date_format:H:i'],
-        //     'break_Totime' => ['nullable', 'date_format:H:i'],
-        //     'leave_FromDate' => ['nullable', 'date'],
-        //     'leave_ToDate' => ['nullable', 'date'],
-        //     'ConsultaionTime' => ['nullable', 'max:100'],            
-        // ]);
-        // Request::validate([
-        //     'doctor_id' => ['nullable','max:100'],
-        //         'availabilityDays' => ['nullable','max:100'],
-        //         'leave_FromDate' => ['nullable', 'date'],
-        //         'leave_ToDate' => ['nullable', 'date'],
-        //         'ConsultaionTime' => ['nullable', 'max:100'],
-        // ]);
-        
-        // Auth::user()->account->availabilitys()->create([
-        //    // Request::validate([
-        //         'doctor_id' => ['nullable','integer'],
-        //         'availabilityDays' => ['nullable','max:100'],
-        //         'availabilityFrom' => ['nullable', 'max:100'],
-        //         'availabilityTo' => ['nullable','max:100'],
-        //         'break_Fromtime' => ['nullable', 'max:100'],
-        //         'break_Totime' => ['nullable','max:100'],
-        //         'leave_FromDate' => ['nullable', 'max:100'],
-        //         'leave_ToDate' => ['nullable', 'max:100'],
-        //         'ConsultaionTime' => ['nullable', 'max:100'],
-        //         'organization_id' => ['nullable', Rule::exists('organizations', 'id')->where(function ($query) {
-        //             $query->where('account_id', Auth::user()->account_id);
-        //         })],
-        //    // ])
-        // ]);
-
-        // return Redirect::route('availabilitys')->with('success', 'Doctor schedule created.');  
-        
+    {   
         Auth::user()->account->availabilitys()->create(
             Request::validate([
                 'availabilityDays' => ['required', 'max:50'],
                 'availabilityFrom' => ['required', 'max:50'],
+                'availabilityTo' => ['nullable', 'max:50'],
                 'organization_id' => ['nullable', Rule::exists('organizations', 'id')->where(function ($query) {
                     $query->where('account_id', Auth::user()->account_id);
-                })],
-                'availabilityTo' => ['nullable', 'max:50'],
+                })],                
                 'break_Fromtime' => ['nullable', 'max:50'],
                 'break_Totime' => ['nullable', 'max:150'],
                 'leave_FromDate' => ['nullable', 'max:50'],
-                'leave_ToDate' => ['nullable', 'max:50'],
+                'leave_ToDate' => ['nullable', 'max:50'],               
                 'ConsultaionTime' => ['nullable', 'max:50'],
             ])
         );
 
         try {
-            Auth::user()->account->availabilitys()->create($request);
+            //Auth::user()->account->availabilitys()->create($request);
         } catch (\Exception $e) {
             return Redirect::back()->withInput()->withErrors(['error' => 'Failed to create doctor schedule.']);
         }
     
-        return Redirect::route('availabilitys')->with('success', 'Contact test created.');
+        return Redirect::route('availabilitys')->with('success', 'Doctor schedule created.');
     }
 
     public function edit(Availability $availabilitys)

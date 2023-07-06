@@ -14,7 +14,9 @@ class Availability extends Model
     protected $table = 'availabilitys'; // Specify the correct table name
 
     protected $fillable = [
+        'id',
         'doctor_id',
+        'account_id',
         'availabilityDays',
         'availabilityFrom',
         'availabilityTo',

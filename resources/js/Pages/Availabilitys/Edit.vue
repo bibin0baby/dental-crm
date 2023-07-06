@@ -110,6 +110,7 @@ export default {
       form: this.$inertia.form({
         availabilityDays: this.availability.availabilityDays,
         availabilityFrom: this.availability.availabilityFrom,
+        availabilityTo: this.availability.availabilityTo,
         organization_id: this.availability.organization_id,
         emavailabilityToail: this.availability.availabilityTo,
         break_Fromtime: this.availability.break_Fromtime,
@@ -117,6 +118,8 @@ export default {
         leave_FromDate: this.availability.leave_FromDate,
         leave_ToDate: this.availability.leave_ToDate,
         ConsultaionTime: this.availability.ConsultaionTime,
+        doctor_id: this.availability.doctor_id,
+        id: this.availability.id,
       }),
     }
   },

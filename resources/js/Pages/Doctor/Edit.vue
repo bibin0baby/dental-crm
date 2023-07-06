@@ -7,7 +7,7 @@
         <span class="text-indigo-400 font-medium">/</span>
         {{ form.first_name }} {{ form.last_name }}
       </h1> 
-      <img v-if="user.photo" class="block ml-4 w-8 h-8 rounded-full" :src="user.photo" />
+      <img v-if="user.photo_path" class="block ml-4 w-8 h-8 rounded-full" :src="user.photo_path" />
     </div>
     <trashed-message v-if="user.deleted_at" class="mb-6" @restore="restore"> This doctor has been deleted. </trashed-message>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
@@ -25,7 +25,7 @@
            
             <option :value="'doctor'">Doctor</option>
           </select-input> -->
-          <file-input v-model="form.photo" :error="form.errors.photo" class="pb-8 pr-6 w-full lg:w-1/2" type="file" accept="image/*" label="Photo" />
+          <file-input v-model="form.photo_path" :error="form.errors.photo_path" class="pb-8 pr-6 w-full lg:w-1/2" type="file" accept="image/*" label="Photo" />
        
         </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
@@ -70,15 +70,14 @@ export default {
         email: this.user.email,
         password: '',
         owner: this.user.owner,
-        role: 'doctor',
-        photo: null,
+        photo_path: null,
       }),
     }
   },
   methods: {
     update() {
       this.form.post(`/doctors/${this.user.id}`, {
-        onSuccess: () => this.form.reset('password', 'photo'),
+        onSuccess: () => this.form.reset('password', 'photo_path'),
       })
     },
     destroy() {

@@ -153,7 +153,7 @@ Route::group(['middleware' => ['role:admin']], function () {
         ->name('doctors')
         ->middleware('auth');
 
-Route::post('doctorsAv', [AvailabilitysController::class, 'store'])
+Route::post('doctors', [AvailabilitysController::class, 'store'])
         ->name('doctors.store')
         ->middleware('auth');
     
@@ -267,14 +267,14 @@ Route::get('availabilitys/{availabilitys}/edit', [AvailabilitysController::class
     ->name('availabilitys.edit')
     ->middleware('auth');
 
-Route::put('availabilitys/{availabilitys}', [AvailabilitysController::class, 'update'])
+Route::put('availabilitys/{availability}', [AvailabilitysController::class, 'update'])
     ->name('availabilitys.update')
     ->middleware('auth');
 
-Route::delete('availabilitys/{availabilitys}', [AvailabilitysController::class, 'destroy'])
+Route::delete('availabilitys/{availability}', [AvailabilitysController::class, 'destroy'])
     ->name('availabilitys.destroy')
     ->middleware('auth');
 
-Route::put('availabilitys/{availabilitys}/restore', [AvailabilitysController::class, 'restore'])
+Route::put('availabilitys/{availability}/restore', [AvailabilitysController::class, 'restore'])
     ->name('availabilitys.restore')
     ->middleware('auth');
