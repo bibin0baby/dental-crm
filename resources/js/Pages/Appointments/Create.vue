@@ -28,8 +28,13 @@
             <option > 3 hours</option>
 
           </select-input>
-          <text-input v-model="form.photo_path" :error="form.errors.photo_path" class="pb-8 pr-6 w-full lg:w-1/2" label="Photo" />
-          <text-input v-model="form.doctor_id" :error="form.errors.doctor_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Doctor" />
+          <text-input v-model="form.photo_path" :error="form.errors.photo_path" class="pb-8 pr-6 w-full lg:w-1/2" type="file"
+            accept="image/*" label="Photo" />
+          <!-- <text-input v-model="form.doctor_id" :error="form.errors.doctor_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Doctor" /> -->
+          <select-input v-model="form.doctor_id" :error="form.errors.doctor_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Doctor Name">
+            <option :value="null" />
+            <option v-for="user in users" :key="user.id" :value="user.id">{{ user.name }}</option>
+          </select-input>
           <select-input v-model="form.contact_id" :error="form.errors.contact_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Patient Name">
             <option :value="null" />
             <option v-for="contact in contacts" :key="contact.id" :value="contact.id">{{ contact.name }}</option>
@@ -63,6 +68,7 @@ export default {
   layout: Layout,
   props: {
     contacts: Array,
+    users:Array,
   },
   remember: 'form',
   data() {
