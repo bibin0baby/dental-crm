@@ -60,6 +60,8 @@ class AppointmentsController extends Controller
                 ->get()
                 ->map
                 ->only('id', 'name'),
+                // ->where('id', $userId)->value('column_name');
+                
         ]);
     }
 
