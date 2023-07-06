@@ -86,12 +86,12 @@ export default {
       this.form.put(`/appointments/${this.appointment.id}`)
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this contact?')) {
+      if (confirm('Are you sure you want to delete this appointment?')) {
         this.$inertia.delete(`/appointments/${this.appointment.id}`)
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this contact?')) {
+      if (confirm('Are you sure you want to restore this appointment?')) {
         this.$inertia.put(`/appointments/${this.appointment.id}/restore`)
       }
     },

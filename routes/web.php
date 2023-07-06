@@ -202,19 +202,20 @@ Route::get('appointments/{appointment}/edit', [AppointmentsController::class, 'e
     ->name('appointments.edit')
     ->middleware('auth');
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
 Route::put('appointments/{appointment}', [AppointmentsController::class, 'update'])
     ->name('appointments.update')
     ->middleware('auth');
 
 Route::delete('appointments/{appointment}', [AppointmentsController::class, 'destroy'])
     ->name('appointments.destroy')
-=======
+    ->middleware('auth');
+// =======
     //Availability
     
- Route::get('availabilitys', [AvailabilitysController::class, 'index'])
-    ->name('availabilitys')
-    ->middleware('auth');
+//  Route::get('availabilitys', [AvailabilitysController::class, 'index'])
+//     ->name('availabilitys')
+//     ->middleware('auth');
 
 Route::get('availabilitys/create', [AvailabilitysController::class, 'create'])
     ->name('availabilitys.create')
@@ -238,5 +239,5 @@ Route::delete('availabilitys/{availabilitys}', [AvailabilitysController::class, 
 
 Route::put('availabilitys/{availabilitys}/restore', [AvailabilitysController::class, 'restore'])
     ->name('availabilitys.restore')
->>>>>>> 55ba8501d2c9f9eea793fecca8f0b8f44c366bd8
+// >>>>>>> 55ba8501d2c9f9eea793fecca8f0b8f44c366bd8
     ->middleware('auth');

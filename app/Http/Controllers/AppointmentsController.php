@@ -142,7 +142,7 @@ class AppointmentsController extends Controller
                     'required',
                     Rule::exists('contacts', 'id')->where(fn ($query) => $query->where('account_id', Auth::user()->account_id)),
                 ],
-                'scheduled_at' => ['required', 'max:50', 'email'],
+                'scheduled_at' => ['required', 'max:50'],
                 'duration' => ['nullable', 'max:50'],
                 'photo_path' => ['nullable', 'max:150'],
                 'doctor_id' => ['required', 'max:50'],
