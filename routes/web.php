@@ -149,21 +149,60 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
 // Doctors
 
 Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('doctors', [DoctorsController::class, 'index'])
+    Route::get('doctors', [AvailabilitysController::class, 'index'])
         ->name('doctors')
         ->middleware('auth');
 
-    Route::post('doctors', [DoctorsController::class, 'store'])
+Route::post('doctorsAv', [AvailabilitysController::class, 'store'])
         ->name('doctors.store')
         ->middleware('auth');
     
 });
 
 Route::group(['middleware' => ['role:admin|doctor']], function () {
-    Route::get('doctoravailability', [DoctorsController::class, 'doctoravailability'])
+    Route::get('availabilitys', [AvailabilitysController::class, 'doctoravailability'])
     ->name('doctors.doctoravailability')
     ->middleware('auth');
 });
+
+Route::group(['middleware' => ['role:admin|doctor']], function () {
+    Route::get('doctors', [DoctorsController::class, 'index'])
+        ->name('doctors')
+        ->middleware('auth');
+
+Route::post('doctors', [DoctorsController::class, 'store'])
+        ->name('doctors.store')
+        ->middleware('auth');
+
+Route::get('doctors/{user}/edit', [DoctorsController::class, 'edit'])
+        ->name('doctors.edit')
+        ->middleware('auth');
+
+Route::get('doctors/create', [DoctorsController::class, 'create'])
+        ->name('doctors.create')
+        ->middleware('auth');        
+
+Route::put('doctors/{user}', [DoctorsController::class, 'update'])
+->name('doctors.update')
+->middleware('auth');
+
+Route::delete('doctors/{user}', [DoctorsController::class, 'destroy'])
+->name('doctors.destroy')
+->middleware('auth');
+
+Route::put('doctors/{user}/restore', [DoctorsController::class, 'restore'])
+->name('doctors.restore')
+->middleware('auth');
+    
+});
+
+
+Route::group(['middleware' => ['role:admin|doctor']], function () {
+    Route::get('availabilitys', [DoctorsController::class, 'doctoravailability'])
+    ->name('doctors.doctoravailability')
+    ->middleware('auth');
+});
+
 
 // Receptionist
 
@@ -202,7 +241,7 @@ Route::get('appointments/{appointment}/edit', [AppointmentsController::class, 'e
     ->name('appointments.edit')
     ->middleware('auth');
 
-// <<<<<<< HEAD
+
 Route::put('appointments/{appointment}', [AppointmentsController::class, 'update'])
     ->name('appointments.update')
     ->middleware('auth');
@@ -210,12 +249,20 @@ Route::put('appointments/{appointment}', [AppointmentsController::class, 'update
 Route::delete('appointments/{appointment}', [AppointmentsController::class, 'destroy'])
     ->name('appointments.destroy')
     ->middleware('auth');
+
 // =======
     //Availability
     
 //  Route::get('availabilitys', [AvailabilitysController::class, 'index'])
 //     ->name('availabilitys')
 //     ->middleware('auth');
+
+    //Availability
+    
+Route::get('availabilitys', [AvailabilitysController::class, 'index'])
+    ->name('availabilitys')
+    ->middleware('auth');
+
 
 Route::get('availabilitys/create', [AvailabilitysController::class, 'create'])
     ->name('availabilitys.create')
@@ -239,5 +286,4 @@ Route::delete('availabilitys/{availabilitys}', [AvailabilitysController::class, 
 
 Route::put('availabilitys/{availabilitys}/restore', [AvailabilitysController::class, 'restore'])
     ->name('availabilitys.restore')
-// >>>>>>> 55ba8501d2c9f9eea793fecca8f0b8f44c366bd8
     ->middleware('auth');
