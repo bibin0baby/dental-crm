@@ -249,11 +249,20 @@ Route::put('appointments/{appointment}', [AppointmentsController::class, 'update
 Route::delete('appointments/{appointment}', [AppointmentsController::class, 'destroy'])
     ->name('appointments.destroy')
     ->middleware('auth');
+
+// =======
+    //Availability
+    
+//  Route::get('availabilitys', [AvailabilitysController::class, 'index'])
+//     ->name('availabilitys')
+//     ->middleware('auth');
+
     //Availability
     
 Route::get('availabilitys', [AvailabilitysController::class, 'index'])
     ->name('availabilitys')
     ->middleware('auth');
+
 
 Route::get('availabilitys/create', [AvailabilitysController::class, 'create'])
     ->name('availabilitys.create')
