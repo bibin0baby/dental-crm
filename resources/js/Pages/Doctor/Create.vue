@@ -68,6 +68,7 @@ export default {
         password: '',
         owner: false,
         photo_path: null,
+        role:'doctor',
       }),
       errorBag: {},
     }
