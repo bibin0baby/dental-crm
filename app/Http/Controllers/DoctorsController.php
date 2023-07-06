@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Doctor;
 Use Illuminate\Support\Facades\Auth;
-//use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +17,7 @@ class DoctorsController extends Controller
 {
     public function index(Request $request)
     {       
+
         return Inertia::render('Doctor/Index', [
             'filters' => Request::all('search', 'trashed'),
             'users' => Auth::user()->account->users()
@@ -29,12 +30,13 @@ class DoctorsController extends Controller
             ->withQueryString()
             ->transform(fn ($user) => [
                 'id' => $user->id,
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'owner' => $user->owner,
-                    'role'  => ($user->roles->pluck('name')[0] == 'standard') ? 'Receptionist' : ucfirst($user->roles->pluck('name')[0]),
-                    'photo_path' => $user->photo_path ? URL::route('image', ['path' => $user->photo_path, 'w' => 40, 'h' => 40, 'fit' => 'crop']) : null,
-                    'deleted_at' => $user->deleted_at,
+                'name' => $user->name,
+                'email' => $user->email,
+                'owner' => $user->owner,
+                'role'  => ($user->roles->pluck('name')[0] == 'standard') ? 'Receptionist' : ucfirst($user->roles->pluck('name')[0]),
+                'photo_path' => $user->photo_path ? URL::route('image', ['path' => $user->photo_path, 'w' => 40, 'h' => 40, 'fit' => 'crop']) : null,
+                'deleted_at' => $user->deleted_at,
+                'client_url'    => URL::signedRoute('client', $user)
             ]),
         ]);
 

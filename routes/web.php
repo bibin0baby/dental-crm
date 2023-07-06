@@ -13,6 +13,7 @@ use App\Http\Controllers\ReceptionistsController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\AppointmentsController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -215,7 +216,7 @@ Route::get('receptionist', [ReceptionistsController::class, 'index'])
 
 Route::get('client/{doc_id}', [ClientsController::class, 'index'])
     ->name('client')
-    ->middleware('guest');
+    ->middleware('signed');
 
 Route::post('client', [ClientsController::class, 'store'])
     ->name('client.store')
