@@ -13,6 +13,7 @@ use App\Http\Controllers\ReceptionistsController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\AppointmentsController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -147,24 +148,25 @@ Route::get('/img/{path}', [ImagesController::class, 'show'])
     ->name('image');
 
 // Doctors
-
+//----- doctors availability schedule --//
 Route::group(['middleware' => ['role:admin']], function () {
-    Route::get('doctors', [AvailabilitysController::class, 'index'])
-        ->name('doctors')
+    Route::get('availabilitys', [AvailabilitysController::class, 'index'])
+        ->name('availabilitys')
         ->middleware('auth');
 
-Route::post('doctorsAv', [AvailabilitysController::class, 'store'])
-        ->name('doctors.store')
+Route::post('availabilitys', [AvailabilitysController::class, 'store'])
+        ->name('availabilitys.store')
         ->middleware('auth');
     
 });
 
 Route::group(['middleware' => ['role:admin|doctor']], function () {
     Route::get('availabilitys', [AvailabilitysController::class, 'doctoravailability'])
-    ->name('doctors.doctoravailability')
+    ->name('availabilitys.doctoravailability')
     ->middleware('auth');
 });
 
+//------ doctor -----
 Route::group(['middleware' => ['role:admin|doctor']], function () {
     Route::get('doctors', [DoctorsController::class, 'index'])
         ->name('doctors')
@@ -214,7 +216,7 @@ Route::get('receptionist', [ReceptionistsController::class, 'index'])
 
 Route::get('client/{doc_id}', [ClientsController::class, 'index'])
     ->name('client')
-    ->middleware('guest');
+    ->middleware('signed');
 
 Route::post('client', [ClientsController::class, 'store'])
     ->name('client.store')
@@ -276,14 +278,14 @@ Route::get('availabilitys/{availabilitys}/edit', [AvailabilitysController::class
     ->name('availabilitys.edit')
     ->middleware('auth');
 
-Route::put('availabilitys/{availabilitys}', [AvailabilitysController::class, 'update'])
+Route::put('availabilitys/{availability}', [AvailabilitysController::class, 'update'])
     ->name('availabilitys.update')
     ->middleware('auth');
 
-Route::delete('availabilitys/{availabilitys}', [AvailabilitysController::class, 'destroy'])
+Route::delete('availabilitys/{availability}', [AvailabilitysController::class, 'destroy'])
     ->name('availabilitys.destroy')
     ->middleware('auth');
 
-Route::put('availabilitys/{availabilitys}/restore', [AvailabilitysController::class, 'restore'])
+Route::put('availabilitys/{availability}/restore', [AvailabilitysController::class, 'restore'])
     ->name('availabilitys.restore')
     ->middleware('auth');

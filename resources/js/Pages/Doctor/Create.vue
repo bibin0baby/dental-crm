@@ -9,19 +9,28 @@
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
       <form @submit.prevent="store">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
-          <text-input v-model="form.first_name" :error="form.errors.first_name" class="pb-8 pr-6 w-full lg:w-1/2"
-            label="First name" />
-          <text-input v-model="form.last_name" :error="form.errors.last_name" class="pb-8 pr-6 w-full lg:w-1/2"
-            label="Last name" />
-          <text-input v-model="form.email" :error="form.errors.email" class="pb-8 pr-6 w-full lg:w-1/2" label="Email" />
-          <text-input v-model="form.password" :error="form.errors.password" class="pb-8 pr-6 w-full lg:w-1/2"
-            type="password" autocomplete="new-password" label="Password" />
-          <select-input v-model="form.owner" :error="form.errors.owner" class="pb-8 pr-6 w-full lg:w-1/2" label="Owner">
+          <text-input v-model="form.first_name" class="pb-8 pr-6 w-full lg:w-1/2" label="First name" />
+          <p v-if="errorBag.first_name" class="text-red-500">{{ errorBag.first_name }}</p>
+
+          <text-input v-model="form.last_name" class="pb-8 pr-6 w-full lg:w-1/2" label="Last name" />
+          <p v-if="errorBag.last_name" class="text-red-500">{{ errorBag.last_name }}</p>
+
+          <text-input v-model="form.email" class="pb-8 pr-6 w-full lg:w-1/2" label="Email" />
+          <p v-if="errorBag.email" class="text-red-500">{{ errorBag.email }}</p>
+
+          <text-input v-model="form.password" class="pb-8 pr-6 w-full lg:w-1/2" type="password"
+            autocomplete="new-password" label="Password" />
+          <p v-if="errorBag.password" class="text-red-500">{{ errorBag.password }}</p>
+
+          <select-input v-model="form.owner" class="pb-8 pr-6 w-full lg:w-1/2" label="Owner">
             <option :value="true">Yes</option>
             <option :value="false">No</option>
           </select-input>
-          <file-input v-model="form.photo" :error="form.errors.photo" class="pb-8 pr-6 w-full lg:w-1/2" type="file"
-            accept="image/*" label="Photo" />
+          <p v-if="errorBag.owner" class="text-red-500">{{ errorBag.owner }}</p>
+
+          <file-input v-model="form.photo_path" class="pb-8 pr-6 w-full lg:w-1/2" type="file" accept="image/*"
+            label="Photo" />
+          <p v-if="errorBag.photo_path" class="text-red-500">{{ errorBag.photo_path }}</p>
         </div>
         <div class="flex items-center justify-end px-8 py-4 bg-gray-50 border-t border-gray-100">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create User</loading-button>
@@ -58,14 +67,18 @@ export default {
         email: '',
         password: '',
         owner: false,
-        photo: null,
-        role: 'doctor',
+        photo_path: null,
       }),
+      errorBag: {},
     }
   },
   methods: {
-    store() {
-      this.form.post('/doctors')
+    async store() {
+      try {
+        await this.form.post('/doctors');
+      } catch (error) {
+        this.errorBag = error.response.data.errors; // Update this line
+      }
     },
   },
 }

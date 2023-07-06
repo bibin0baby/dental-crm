@@ -29,7 +29,9 @@
           <th class="pb-4 pt-6 px-6">Name</th>
           <th class="pb-4 pt-6 px-6">Email</th>
           <th class="pb-4 pt-6 px-6">Owner</th>
-          <th class="pb-4 pt-6 px-6" colspan="2">Role</th>
+          <th class="pb-4 pt-6 px-6">Role</th>
+          <th class="pb-4 pt-6 px-6">Client URL</th>
+          <th class="pb-4 pt-6 px-6" colspan="2"></th>
         </tr>
         <tr v-for="user in users" :key="user.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
@@ -52,6 +54,11 @@
           <td class="border-t">
             <Link class="flex items-center px-6 py-4" :href="`/doctors/${user.id}/edit`" tabindex="-1">
               {{ user.role }}
+            </Link>
+          </td>
+          <td class="border-t">
+            <Link class="flex items-center px-6 py-4" :href="`${user.client_url}`" tabindex="-1">
+              {{ user.client_url }}
             </Link>
           </td>
           <td class="w-px border-t">

@@ -31,23 +31,24 @@
           <th class="pb-4 pt-6 px-6">Availability Days</th>
           <th class="pb-4 pt-6 px-6">Availability </th>
           <th class="pb-4 pt-6 px-6">Break Time</th>
-          <th class="pb-4 pt-6 px-6" colspan="2">Leave </th>
+          <th class="pb-4 pt-6 px-6" >Leave </th>
+          <th class="pb-4 pt-6 px-6" colspan="2">Consultaion Time </th>
         </tr>
         <tr v-for="availability in availabilitys.data" :key="availability.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-          <td class="border-t">
+          <td class="border-t pb-7">
             <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/availabilitys/${availability.id}/edit`">
               {{ availability.availabilityDays }}
               <icon v-if="availability.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
             </Link>
           </td>
-          <td class="border-t">
+          <td class="border-t pb-7">
             <Link class="flex items-center px-6 py-4" :href="`/availabilitys/${availability.id}/edit`" tabindex="-1">
               <div v-if="availability.availabilityFrom">
                <span>{{ availability.availabilityFrom }} </span> <span>-</span> <span> {{ availability.availabilityTo }}</span>
               </div>
             </Link>
           </td>
-          <td class="border-t">
+          <td class="border-t pb-7">
             <Link class="flex items-center px-6 py-4" :href="`/availabilitys/${availability.id}/edit`" tabindex="-1">
               
               <div v-if="availability.break_Fromtime">
@@ -56,7 +57,7 @@
               </div>
             </Link>
           </td>
-          <td class="border-t">
+          <td class="border-t pb-7">
             <Link class="flex items-center px-6 py-4" :href="`/availabilitys/${availability.id}/edit`" tabindex="-1">
              
               <div v-if="availability.leave_FromDate">
@@ -65,7 +66,17 @@
               </div> 
             </Link>
           </td>
-          <td class="w-px border-t">
+          <td class="border-t pb-7">
+            <Link class="flex items-center px-6 py-4" :href="`/availabilitys/${availability.id}/edit`" tabindex="-1">
+             
+              <div v-if="availability.ConsultaionTime">
+                <span>{{ availability.ConsultaionTime }} </span> 
+               
+              </div> 
+            </Link>
+          </td>
+          
+          <td class="w-px border-t pb-7">
             <Link class="flex items-center px-4" :href="`/availabilitys/${availability.id}/edit`" tabindex="-1">
               <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
             </Link>

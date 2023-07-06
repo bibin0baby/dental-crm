@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Doctor;
 Use Illuminate\Support\Facades\Auth;
-//use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +17,7 @@ class DoctorsController extends Controller
 {
     public function index(Request $request)
     {       
+
         return Inertia::render('Doctor/Index', [
             'filters' => Request::all('search', 'trashed'),
             'users' => Auth::user()->account->users()
@@ -29,12 +30,13 @@ class DoctorsController extends Controller
             ->withQueryString()
             ->transform(fn ($user) => [
                 'id' => $user->id,
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'owner' => $user->owner,
-                    'role'  => ($user->roles->pluck('name')[0] == 'standard') ? 'Receptionist' : ucfirst($user->roles->pluck('name')[0]),
-                    'photo' => $user->photo_path ? URL::route('image', ['path' => $user->photo_path, 'w' => 40, 'h' => 40, 'fit' => 'crop']) : null,
-                    'deleted_at' => $user->deleted_at,
+                'name' => $user->name,
+                'email' => $user->email,
+                'owner' => $user->owner,
+                'role'  => ($user->roles->pluck('name')[0] == 'standard') ? 'Receptionist' : ucfirst($user->roles->pluck('name')[0]),
+                'photo_path' => $user->photo_path ? URL::route('image', ['path' => $user->photo_path, 'w' => 40, 'h' => 40, 'fit' => 'crop']) : null,
+                'deleted_at' => $user->deleted_at,
+                'client_url'    => URL::signedRoute('client', $user)
             ]),
         ]);
 
@@ -67,7 +69,7 @@ class DoctorsController extends Controller
             'password' => ['nullable'],
             'owner' => ['required', 'boolean'],
             'role' => ['required', 'boolean'],
-            'photo' => ['nullable', 'image'],
+            'photo_path' => ['nullable', 'image'],
         ]);
 
         $created_user = Auth::user()->account->users()->create([
@@ -92,9 +94,10 @@ class DoctorsController extends Controller
                 'last_name' => $user->last_name,
                 'email' => $user->email,
                 'owner' => $user->owner,
+                'password' => $user->password,
                 'role'  => $user->roles->pluck('name')[0],
                 'role_name'  => ($user->roles->pluck('name')[0] == 'standard') ? 'Receptionist' : ucfirst($user->roles->pluck('name')[0]),
-                'photo' => $user->photo_path ? URL::route('image', ['path' => $user->photo_path, 'w' => 60, 'h' => 60, 'fit' => 'crop']) : null,
+                'photo_path' => $user->photo_path ? URL::route('image', ['path' => $user->photo_path, 'w' => 60, 'h' => 60, 'fit' => 'crop']) : null,
                 'deleted_at' => $user->deleted_at,
             ],
         ]);
@@ -113,7 +116,7 @@ class DoctorsController extends Controller
             'password' => ['nullable'],
             'owner' => ['required', 'boolean'],
             'role' => ['required', 'max:15'],
-            'photo' => ['nullable', 'image'],
+            'photo_path' => ['nullable', 'image'],
         ]);
 
         $user->update(Request::only('first_name', 'last_name', 'email', 'owner'));
