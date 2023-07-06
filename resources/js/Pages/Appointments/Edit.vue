@@ -4,7 +4,7 @@
     <h1 class="mb-8 text-3xl font-bold">
       <Link class="text-indigo-400 hover:text-indigo-600" href="/appointments">Appointments</Link>
       <span class="text-indigo-400 font-medium">/</span>
-      {{ form.contact_first_name }} 
+      {{ form.title }} 
     </h1>
     <trashed-message v-if="appointment.deleted_at" class="mb-6" @restore="restore"> This appointment has been deleted. </trashed-message>
     <div class="max-w-3xl bg-white rounded-md shadow overflow-hidden">
@@ -28,14 +28,16 @@
 
           </select-input>
          
-         <text-input v-model="form.photo_path" :error="form.errors.photo_path" class="pb-8 pr-6 w-full lg:w-1/2" label="photo Path" />
+         <text-input v-model="form.photo_path" :error="form.errors.photo_path" class="pb-8 pr-6 w-full lg:w-1/2"  accept="image/*" label="photo Path" />
          <select-input v-model="form.contact_id" :error="form.errors.contact_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Patient Name">
             <option :value="null" />
-            <option v-for="contact in contacts" :key="contact.id" :value="contact.id">{{ contact.first_name }}</option>
+            <option v-for="contact in contacts" :key="contact.id" :value="contact.id">{{ contact.name }}</option>
           </select-input>
-          <text-input v-model="form.doctor_id" :error="form.errors.doctor_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Doctor Name" />
-         
-        </div>
+          <select-input v-model="form.doctor_id" :error="form.errors.doctor_id" class="pb-8 pr-6 w-full lg:w-1/2" label="Doctor Name">
+            <option :value="null" />
+            <option v-for="user in users" :key="user.id" :value="user.id">{{ user.name }}</option>
+          </select-input>
+          </div>
         <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
           <button v-if="!appointment.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Appointment</button>
           <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Appointment</loading-button>
@@ -66,6 +68,7 @@ export default {
   props: {
     appointment: Object,
     contacts: Array,
+    users: Array,
   },
   remember: 'form',
   data() {

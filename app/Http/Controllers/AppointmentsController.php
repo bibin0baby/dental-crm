@@ -33,7 +33,7 @@ class AppointmentsController extends Controller
                     'scheduled_at' => $appointment->scheduled_at,
                     'duration' => $appointment->duration,
                    'photo_path' => $appointment->photo_path,
-                  'doctor_id' => $appointment->doctor_id,
+                  'doctor_id' => $appointment->user ? $appointment->user->only('name'):null,
                     'contact' => $appointment->contact ? $appointment->contact->only('name') : null,
                 ]),
         ]);
@@ -50,6 +50,12 @@ class AppointmentsController extends Controller
         return Inertia::render('Appointments/Create', [
             'contacts' => Auth::user()->account
                 ->contacts()
+                ->orderBy('name')
+                ->get()
+                ->map
+                ->only('id', 'name'),
+                 'users' => Auth::user()->account
+                ->users()
                 ->orderBy('name')
                 ->get()
                 ->map
@@ -75,7 +81,9 @@ class AppointmentsController extends Controller
                 'scheduled_at' => ['required', 'max:50'],
                 'duration' => ['nullable', 'max:50'],
                 'photo_path' => ['nullable', 'max:150'],
-                'doctor_id' => ['required', 'max:50'],
+                'doctor_id' => ['required', Rule::exists('users', 'id')->where(function ($query) {
+                    $query->where('account_id', Auth::user()->account_id);
+                })],
                 'contact_id' => ['required', Rule::exists('contacts', 'id')->where(function ($query) {
                     $query->where('account_id', Auth::user()->account_id);
                 })],
@@ -118,10 +126,16 @@ class AppointmentsController extends Controller
                
             ],
             'contacts' => Auth::user()->account->contacts()
-                ->orderBy('first_name')
+                ->orderBy('name')
                 ->get()
                 ->map
-                ->only('id', 'first_name'),
+                ->only('id', 'name'),
+                'users' => Auth::user()->account->users()
+                ->orderBy('name')
+                ->get()
+                ->map
+                ->only('id', 'name'),
+
         ]);
     }
 

@@ -25,6 +25,11 @@ class Appointment extends Model
     {
         return $this->belongsTo(Doctor::class);
     }
+    
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function contact()
     {
@@ -46,7 +51,7 @@ class Appointment extends Model
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%'.$search.'%')
-                    ->orWhere('doctor_id', 'like', '%'.$search.'%')
+                    ->orWhere('user_id', 'like', '%'.$search.'%')
                 
                     
                    
