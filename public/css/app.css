@@ -163881,8 +163881,7 @@ input:focus, input:active, select:focus, select:active, textarea:focus, textarea
   .background-image {
     background-image: url('/dentist-medical-background-with-3d-tooth-design_1017-26095.avif');
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;    
   }
-
 }
 
