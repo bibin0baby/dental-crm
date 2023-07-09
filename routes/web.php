@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AvailabilitysController;
+use App\Http\Controllers\ConsultationsController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
@@ -289,3 +290,43 @@ Route::delete('availabilitys/{availability}', [AvailabilitysController::class, '
 Route::put('availabilitys/{availability}/restore', [AvailabilitysController::class, 'restore'])
     ->name('availabilitys.restore')
     ->middleware('auth');
+
+    //------ Consultaion -----
+Route::group(['middleware' => ['role:admin|doctor']], function () {
+
+    //appointments
+
+Route::get('consultations', [ConsultationsController::class, 'index'])
+->name('consultations')
+->middleware('auth');
+
+Route::get('consultations/create', [ConsultationsController::class, 'create'])
+->name('consultations.create')
+->middleware('auth');
+
+Route::post('consultations', [ConsultationsController::class, 'store'])
+->name('consultations.store')
+->middleware('auth');
+
+Route::get('consultations/{appointment}/edit', [ConsultationsController::class, 'edit'])
+->name('consultations.edit')
+->middleware('auth');
+
+
+Route::put('consultations/{appointment}', [ConsultationsController::class, 'update'])
+->name('consultations.update')
+->middleware('auth');
+
+Route::delete('consultations/{appointment}', [ConsultationsController::class, 'destroy'])
+->name('consultations.destroy')
+->middleware('auth');
+    
+});
+
+
+// Route::group(['middleware' => ['role:admin|doctor']], function () {
+//     Route::get('availabilitys', [DoctorsController::class, 'doctoravailability'])
+//     ->name('doctors.doctoravailability')
+//     ->middleware('auth');
+// });
+

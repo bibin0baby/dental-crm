@@ -47,7 +47,8 @@ class AvailabilitysController extends Controller
                 ->orderBy('name')
                 ->get()
                 ->map
-                ->only('id', 'name'),
+                ->only('id', 'name'), 
+                'doctor_id' => Auth::user()->id,               
         ]);
     }
 
@@ -67,7 +68,8 @@ class AvailabilitysController extends Controller
                 'leave_FromDate' => ['nullable', 'max:50'],
                 'leave_ToDate' => ['nullable', 'max:50'],               
                 'ConsultaionTime' => ['nullable', 'max:50'],
-            ])
+                'doctor_id' => ['nullable', 'max:50'],
+            ])            
         );
 
         try {

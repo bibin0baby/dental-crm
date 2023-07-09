@@ -13,9 +13,8 @@
        
       </div>
       <div class="flex flex-wrap -mb-8 -mr-6 p-8">
-        <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">Availability</label>
-        <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;    margin-left: -37px;">Days</label>
-        <select-input v-model="form.availabilityDays" :error="form.errors.availabilityDays" class="pb-14 pr-14  lg:w-1/05">
+      
+        <select-input v-model="form.availabilityDays" :error="form.errors.availabilityDays" class="pb-8 pr-6 w-full lg:w-1/2" label="Availability Days">
 
           <option value="Sunday">Sunday</option>
           <option value="Monday">Monday</option>
@@ -56,11 +55,9 @@
         <label class="pb-14 pr-14  lg:w-1/05" style="width: 36%; font-weight: 500;">Consultaion </label>
         <label class="pb-14 pr-14  lg:w-1/05" style="margin-left: -256px;margin-right: 0px; font-weight: 500;"> Time :</label>
         <select-input v-model="form.ConsultaionTime" :error="form.errors.ConsultaionTime"
-          class="pb-14 pr-14  lg:w-1/05">
-
-          <option value="05:00">05:00 Min</option>
-          <option value="10:00">10:00 Min</option>
+          class="pb-14 pr-14  lg:w-1/05">          
           <option value="15:00">15:00 Min</option>
+          <option value="05:00">30:00 Min</option>
         </select-input>
         <!-- <input type="time" min="0" max="59" step="1" v-model="minutes"> -->
         <!-- <input type="number" v-model="form.ConsultaionTime" :error="form.errors.ConsultaionTime"

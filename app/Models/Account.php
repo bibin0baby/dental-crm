@@ -35,5 +35,9 @@ class Account extends Model
         return $this->hasMany(Doctor::class);
     }
 
-   
+    public function consultations()
+    {
+        return $this->hasMany(Consultation::class);
+    }
+    
 }

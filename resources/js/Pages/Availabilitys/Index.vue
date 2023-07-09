@@ -11,18 +11,10 @@
           <option value="only">Only Trashed</option>
         </select>
       </search-filter>
-      <span v-if="availabilitys.data.length === 0" :style="{ display: 'block' }">
-        <Link class="btn-indigo" href="/availabilitys/create">
+      <Link class="btn-indigo" href="/availabilitys/create">
         <span >Create</span>
         <span class="hidden md:inline">&nbsp;Availability</span>
       </Link>
-</span>
-<span v-else :style="{ display: 'none' }">
-  <Link class="btn-indigo" href="/availabilitys/create">
-        <span >Create</span>
-        <span class="hidden md:inline">&nbsp;Availability</span>
-      </Link>
-</span>
     
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">

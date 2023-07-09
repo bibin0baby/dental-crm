@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Appointment extends Model
+class Consultation extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -14,6 +14,11 @@ class Appointment extends Model
     public function appointments()
     {
         return $this->hasMany(Appointment::class);
+    }
+
+    public function consltations()
+    {
+        return $this->hasMany(Consultation::class);
     }
 
     public function resolveRouteBinding($value, $field = null)
@@ -36,15 +41,6 @@ class Appointment extends Model
         return $this->belongsTo(Contact::class);
     }
 
-    public function consultation()
-    {
-        return $this->belongsTo(Consultation::class);
-    }
-
-     public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
     public function getNameAttribute()
     {
         return $this->first_name.' '.$this->last_name;
