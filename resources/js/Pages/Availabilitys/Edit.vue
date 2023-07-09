@@ -1,81 +1,109 @@
 <template>
   <div>
+
     <Head :title="`${form.first_name} ${form.last_name}`" />
     <h1 class="mb-8 text-3xl font-bold">
       <Link class="text-indigo-400 hover:text-indigo-600" href="/availabilitys">Doctor Schedule</Link>
       <span class="text-indigo-400 font-medium">/</span>
       {{ form.first_name }} {{ form.last_name }}
     </h1>
-    <trashed-message v-if="availability.deleted_at" class="mb-6" @restore="restore"> This schedule has been deleted. </trashed-message>
-    <div class="max-w-5xl bg-white rounded-md shadow overflow-hidden">
+    <trashed-message v-if="availability.deleted_at" class="mb-6" @restore="restore"> This schedule has been deleted.
+    </trashed-message>
+    <div class="max-w-5xl bg-white rounded-md shadow overflow-hidden" style="padding-top: 33px;">
       <form @submit.prevent="update">
-      <div>
-       
-      </div>
-      <div class="flex flex-wrap -mb-8 -mr-6 p-8">
-      
-        <select-input v-model="form.availabilityDays" :error="form.errors.availabilityDays" class="pb-8 pr-6 w-full lg:w-1/2" label="Availability Days">
+        <div class="max-w-5xl bg-white rounded-md shadow overflow-hidden">
+          <table class="w-full">
+            <tbody>
+              <tr >
+        <td class="pb-8 pr-6 w-1/4">
+          <label class="font-bold" style="padding-left: 20px;">Availability Days</label>
+          </td>
+          <td class="pb-8 pr-6 w-1/4">
+          <select-input v-model="form.availabilityDays">
+            <option :value="null" />
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+          </select-input>
+          <p v-if="form.errors.availabilityDays" class="text-red-500">{{ form.errors.availabilityDays }}</p>
+        </td>
+        <td class="pb-8 pr-6 w-1/4">
+          <label class="font-bold">From      </label>
+          <input type="time" v-model="form.availabilityFrom">
+          <p v-if="form.errors.availabilityFrom" class="text-red-500">{{ form.errors.availabilityFrom }}</p>
+        </td>
+        <td class="pb-8 pr-6 w-1/4">
+          <label class="font-bold">To      </label>
+          <input type="time" v-model="form.availabilityTo">
+          <p v-if="form.errors.availabilityTo" class="text-red-500">{{ form.errors.availabilityTo }}</p>
+        </td>
+        </tr>
+        <tr>
+        <td class="pb-8 pr-6 w-1/4">
+          <label class="font-bold" style="padding-left: 20px;">Break Time </label>
+          </td>
+        <td class="pb-8 pr-6 w-1/4">
+          <label class="font-bold">From      </label>
+          <input type="time" v-model="form.break_Fromtime">
+          <p v-if="form.errors.break_Fromtime" class="text-red-500">{{ form.errors.break_Fromtime }}</p>
+        </td>
 
-          <option value="Sunday">Sunday</option>
-          <option value="Monday">Monday</option>
-          <option value="Tuesday">Tuesday</option>
-          <option value="Wednesday">Wednesday</option>
-          <option value="Thursday">Thursday</option>
-          <option value="Friday">Friday</option>
-          <option value="Saturday">Saturday</option>
-        </select-input>
-        <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">From :</label>
-        <input type="time" v-model="form.availabilityFrom" :error="form.errors.availabilityFrom"
-          class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">
+        <td class="pb-8 pr-6 w-1/4">
+          <label class="font-bold">To      </label>
+          <input type="time" v-model="form.break_Totime">
+          <p v-if="form.errors.break_Totime" class="text-red-500">{{ form.errors.break_Totime }}</p>
+        </td>
+        
+        </tr>
+        <tr>
+        <td class="pb-8 pr-6 w-1/4">
+          <label class="font-bold" style="padding-left: 20px;">Leave </label>
+         </td>
 
-        <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">To :</label>
-        <input type="time" v-model="form.availabilityTo" :error="form.errors.availabilityTo"
-          class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;">
+         <td class="pb-8 pr-6 w-1/4">
+          <label class="font-bold">From      </label>
+          <input type="date" v-model="form.leave_FromDate">
+          <p v-if="form.errors.leave_FromDate" class="text-red-500">{{ form.errors.leave_FromDate }}</p>
+        </td>
 
-        <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;"> Break Time</label>
-        <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;    margin-left: -39px;"> From :</label>
-        <input type="time" v-model="form.break_Fromtime" :error="form.errors.break_Totime"
-          style="    margin-right: 22px; margin-left: -6px;" class="pb-14 pr-14  lg:w-1/05">
 
-        <label class="pb-14 pr-14  lg:w-1/05" style="font-weight: 500;"> To :</label>
-        <input type="time" v-model="form.break_Totime" :error="form.errors.break_Totime"
-          style="   margin-left: 13px; margin-right: 20px;" class="pb-14 pr-14  lg:w-1/05">
+        <td class="pb-8 pr-6 w-1/4">
+          <label class="font-bold">To      </label>
+          <input type="date" v-model="form.leave_ToDate">
+          <p v-if="form.errors.leave_ToDate" class="text-red-500">{{ form.errors.leave_ToDate }}</p>
+        </td>
 
-        <label class="pb-14 pr-14  lg:w-1/05" style="width: 36%; font-weight: 500;"> Leave</label>
-        <label class="pb-14 pr-14  lg:w-1/05" style="margin-left: -256px;margin-right: 0px; font-weight: 500;"> From
-          :</label>
-        <input type="date" v-model="form.leave_FromDate" :error="form.errors.leave_FromDate"
-          class="pb-14 pr-14  lg:w-1/05" style=" margin-right: 18px; margin-left: -11px;">
+        
+        <td>
 
-        <label class="pb-14 pr-14  lg:w-1/05" style=" margin-left: -23px;margin-right: 0px; font-weight: 500;"> To
-          :</label>
-        <input type="date" v-model="form.leave_ToDate" :error="form.errors.leave_ToDate" class="pb-14 pr-14  lg:w-1/05"
-          style="">
-
-        <label class="pb-14 pr-14  lg:w-1/05" style="width: 36%; font-weight: 500;">Consultaion </label>
-        <label class="pb-14 pr-14  lg:w-1/05" style="margin-left: -256px;margin-right: 0px; font-weight: 500;"> Time :</label>
-        <select-input v-model="form.ConsultaionTime" :error="form.errors.ConsultaionTime"
-          class="pb-14 pr-14  lg:w-1/05">          
-          <option value="15:00">15:00 Min</option>
-          <option value="05:00">30:00 Min</option>
-        </select-input>
-        <!-- <input type="time" min="0" max="59" step="1" v-model="minutes"> -->
-        <!-- <input type="number" v-model="form.ConsultaionTime" :error="form.errors.ConsultaionTime"
-          class="pb-14 pr-14  lg:w-1/05" style="margin-left: -157px;margin-right: 100px;"> -->
-        <input type="hidden" v-model="form.doctor_id">
-        <app-layout>
-          <template #header>
-            <h1>Calendar</h1>
-          </template>
-
-          <calendar></calendar>
-        </app-layout>
-      </div>
-      <div class="flex items-center px-8 py-4 bg-gray-50 border-t border-gray-100">
-          <button v-if="!availability.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete Schedule</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update Schedule</loading-button>
+        </td>
+      </tr>
+              <tr>
+                <td class="pb-8 pr-6 w-1/4">
+                  <label class="font-bold" style="padding-left: 20px;">Consultaion Time</label>
+                </td>
+                <td class="pb-8 pr-6 w-1/4">
+                  <select-input v-model="form.ConsultaionTime" :error="form.errors.ConsultaionTime" class="w-full">
+                    <option value="15:00">15:00 Min</option>
+                    <option value="30:00">30:00 Min</option>
+                  </select-input>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="px-8 py-4 bg-gray-50 border-t border-gray-100">
+            <button v-if="!availability.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button"
+              @click="destroy">Delete Schedule</button>
+            <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update
+              Schedule</loading-button>
+          </div>
         </div>
-    </form>
+      </form>
+
     </div>
   </div>
 </template>

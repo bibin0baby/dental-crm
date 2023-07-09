@@ -85,9 +85,8 @@
         <td class="pb-8 pr-6 w-1/4">
           <select-input v-model="form.ConsultaionTime">
             <option :value="null" />
-            <option value="05:00">05:00 Min</option>
-            <option value="10:00">10:00 Min</option>
             <option value="15:00">15:00 Min</option>
+            <option value="30:00">30:00 Min</option>
           </select-input>
           </td>
           <td class="pb-8 pr-6 w-1/4">
