@@ -10,7 +10,7 @@
       <form @submit.prevent="store">
         <div class="flex flex-wrap -mb-8 -mr-6 p-8">
          
-          <text-input v-model="form.title" :error="form.errors.title" class="pb-8 pr-6 w-full lg:w-1/2" label="Treatment Type" />
+          <text-input v-model="form.title" :error="form.errors.title" class="pb-6 pr-6 w-full lg:w-1" label="Treatment Type" />
           <text-input v-model="form.description" :error="form.errors.description" class="pb-8 pr-6 w-full lg:w-1/2" label="Description" />
           <!-- <text-input v-model="form.scheduled_at" :error="form.errors.scheduled_at"  class="pb-8 pr-6 w-full lg:w-1/2" label="scheduled at" /> -->
           <label class="pb-8 pr-6 w-full lg:w-1/2" >Scheduled at: <br><br>
