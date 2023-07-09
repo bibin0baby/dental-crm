@@ -27954,6 +27954,12 @@ input:focus, input:active, select:focus, select:active, textarea:focus, textarea
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.background-image {
+  background-image: url('/dentist-medical-background-with-3d-tooth-design_1017-26095.avif');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -163878,4 +163884,3 @@ input:focus, input:active, select:focus, select:active, textarea:focus, textarea
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
-

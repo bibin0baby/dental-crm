@@ -11,10 +11,12 @@
           <option value="only">Only Trashed</option>
         </select>
       </search-filter>
-      <Link class="btn-indigo" href="/availabilitys/create">
+      <span :style="{ display: 'block' }">
+        <Link class="btn-indigo" href="/availabilitys/create">
         <span >Create</span>
         <span class="hidden md:inline">&nbsp;Availability</span>
-      </Link>
+        </Link>
+      </span>
     
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">

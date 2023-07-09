@@ -35,6 +35,7 @@
             </div>
           </form>
         </template>
+        <template #footer> </template>
       </modal>
     </Teleport>
   </div>
@@ -77,6 +78,7 @@ export default {
     //showModal : false
     //filters: Object,
     appointments: Object,
+    availability: Object,
     doctor_id: String,
   },
   remember: 'form',
@@ -100,6 +102,7 @@ export default {
         selectMinDistance: 1,
         dateClick: this.handleDateClick,
         slotDuration: '00:15:00',
+        businessHours: {},
         events: this.appointments
       },
       form: this.$inertia.form({

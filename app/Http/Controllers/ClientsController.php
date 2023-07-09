@@ -24,8 +24,67 @@ class ClientsController extends Controller
             ->where('doctor_id', $doc_id)
             ->where('scheduled_at > ', new Datetime())
             ->get();
+        $availability = DB::table('availabilitys')
+            ->select('*')
+            ->where('doctor_id', $doc_id)
+            ->get();
+        $businessHours = [];
+        $i = 0;
+        foreach ($availability as $key => $value) {
+            if($value->availabilityDays == 'Monday') {
+                $businessHours[$i] = [
+                    'daysOfWeek'    => [1],
+                    'startTime'     => $value->availabilityFrom, // 8am
+                    'endTime'       => $value->availabilityTo // 6pm
+                ];
+            }
+            if($value->availabilityDays == 'Tuesday') {
+                $businessHours[$i] = [
+                    'daysOfWeek'    => [2],
+                    'startTime'     => $value->availabilityFrom, // 8am
+                    'endTime'       => $value->availabilityTo // 6pm
+                ];
+            }
+            if($value->availabilityDays == 'Wednesday') {
+                $businessHours[$i] = [
+                    'daysOfWeek'    => [3],
+                    'startTime'     => $value->availabilityFrom, // 8am
+                    'endTime'       => $value->availabilityTo // 6pm
+                ];
+            }
+            if($value->availabilityDays == 'Thursday') {
+                $businessHours[$i] = [
+                    'daysOfWeek'    => [4],
+                    'startTime'     => $value->availabilityFrom, // 8am
+                    'endTime'       => $value->availabilityTo // 6pm
+                ];
+            }
+            if($value->availabilityDays == 'Friday') {
+                $businessHours[$i] = [
+                    'daysOfWeek'    => [5],
+                    'startTime'     => $value->availabilityFrom, // 8am
+                    'endTime'       => $value->availabilityTo // 6pm
+                ];
+            }
+            if($value->availabilityDays == 'Saturday') {
+                $businessHours[$i] = [
+                    'daysOfWeek'    => [6],
+                    'startTime'     => $value->availabilityFrom, // 8am
+                    'endTime'       => $value->availabilityTo // 6pm
+                ];
+            }
+            if($value->availabilityDays == 'Sunday') {
+                $businessHours[$i] = [
+                    'daysOfWeek'    => [7],
+                    'startTime'     => $value->availabilityFrom, // 8am
+                    'endTime'       => $value->availabilityTo // 6pm
+                ];
+            }
+            $i = $i+1;
+        }
         return Inertia::render('Clients/Index', [
             'appointments' => $appointments,
+            'availability' => $availability,
             'doctor_id' => $doc_id,
         ]);
     }
